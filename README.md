@@ -47,13 +47,29 @@ A análise se concentra no processo de compra, da criação ou utilização de u
 
 ### 1.2 Atores, objetivos e capacidades
 
-Consideramos três papéis na interação. Para a análise estratégica, **plataforma e operador formam o lado defensor**: o software aplica as regras de compra, enquanto o operador define e ajusta essas regras. Essa distinção será mantida no diagrama de contexto.
+Consideramos três papéis na interação. Para a análise estratégica, **a plataforma e seu administrador formam o lado defensor**: o software aplica as regras de compra, enquanto o administrador da plataforma define e ajusta essas regras. Essa distinção será mantida no diagrama de contexto.
 
 | Ator | Objetivo | Ações ou capacidades | Informações observáveis | Restrições ou custos |
 | --- | --- | --- | --- | --- |
 | **Comprador legítimo** | Comprar até quatro ingressos para si e seus acompanhantes, sem impedimentos indevidos. | Criar e acessar uma conta; consultar disponibilidade; selecionar e comprar ingressos; cumprir verificações solicitadas. | Preço e disponibilidade exibidos; limite informado; pedidos de verificação; confirmação ou recusa da compra. | Preço dos ingressos; tempo de espera; estoque limitado; esforço e possível exposição de dados nas verificações. |
 | **Revendedor** | Obter mais de quatro ingressos para o mesmo evento, reunindo-os para revenda. | Criar ou controlar várias contas; coordenar compras por outras pessoas; variar a origem das conexões; repetir tentativas após recusas. | Regras divulgadas; disponibilidade; solicitações de verificação; aceitação, limitação ou recusa das compras. Não conhece diretamente os critérios internos de detecção. | Capital para comprar ingressos; tempo e custo para manter contas, conexões e intermediários; estoque limitado; risco de bloqueio ou recusa. |
-| **Plataforma e operador** | Distribuir os ingressos conforme as regras do evento e manter a compra acessível aos usuários legítimos. | Definir limites; registrar tentativas; relacionar sinais de contas e conexões; solicitar verificações; aceitar ou recusar compras; ajustar controles. | Cadastros, tentativas e resultados de compra; endereços de rede utilizados; resultados das verificações; estoque. Não observa com certeza quem controla cada conta. | Custo operacional das verificações; necessidade de tratar dados pessoais; risco de barrar compradores legítimos ou permitir compras coordenadas. |
+| **Plataforma e administrador** | Distribuir os ingressos conforme as regras do evento e manter a compra acessível aos usuários legítimos. | Definir limites; registrar tentativas; relacionar sinais de contas e conexões; solicitar verificações; aceitar ou recusar compras; ajustar controles. | Cadastros, tentativas e resultados de compra; endereços de rede utilizados; resultados das verificações; estoque. Não observa com certeza quem controla cada conta. | Custo operacional das verificações; necessidade de tratar dados pessoais; risco de barrar compradores legítimos ou permitir compras coordenadas. |
+
+### 1.3 Regras e pressupostos
+
+A propriedade a preservar é a **distribuição justa do estoque de ingressos**, sem impor obstáculos desproporcionais aos compradores legítimos. A **regra inicial** limita a quatro o total de ingressos comprados por uma mesma conta para o evento analisado, somando compras anteriores dessa conta. Ela não identifica, por si só, quem controla contas diferentes ou quem receberá os ingressos.
+
+Para reconhecer compras possivelmente relacionadas, a plataforma pode observar **conta utilizada, horário das tentativas, quantidade solicitada e endereço IP**. Nas rodadas seguintes, o administrador pode usar esses sinais para solicitar verificações adicionais, inclusive de identidade. Esses dados são **indícios**, não provas de que duas compras pertencem à mesma pessoa; o limite por conta é o único controle obrigatório no cenário inicial.
+
+| ID | Pressuposto | Como pode falhar | Consequência para o sistema |
+| --- | --- | --- | --- |
+| **P1** | Cada interessado usa uma única conta para comprar ingressos do evento. | Um revendedor cria ou controla várias contas e compra até quatro ingressos em cada uma. | O limite é respeitado em cada conta, mas um mesmo interessado acumula mais de quatro ingressos. |
+| **P2** | O endereço IP ajuda a reconhecer compras coordenadas sem confundir compradores diferentes. | O revendedor muda de rede ou usa VPN; compradores legítimos compartilham uma rede doméstica ou pública. | Compras relacionadas podem passar despercebidas, enquanto compras legítimas podem ser sinalizadas. |
+| **P3** | Verificar a identidade de cada comprador impede que uma pessoa concentre os ingressos. | O revendedor recruta pessoas reais para comprar até quatro ingressos cada uma e repassá-los depois. | As identidades são distintas e válidas, mas os ingressos continuam concentrados pelo mesmo interessado. |
+
+> - **Regra inicial:** até quatro ingressos por conta no evento analisado.
+> - **Sinais possíveis:** conta, horário, quantidade, IP e, se exigida, identidade verificada.
+> - **Limite dos controles:** contas, redes e identidades distintas não garantem compradores independentes.
 
 ## ♟️ 2. Modelo estratégico estático
 
