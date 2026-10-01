@@ -1,12 +1,14 @@
 # Engenharia de Software Adversarial - Sistema de compra de ingressos
 
-[descrição breve do repositório (max 350 caracteres)]
+Análise de uma plataforma hipotética de venda de ingressos para diferentes eventos. O trabalho recorta a compra em um evento de alta demanda e examina como um revendedor pode superar o limite de quatro ingressos por conta, além das respostas da plataforma e seus efeitos sobre compradores legítimos.
 
 ## 🆔 Identificação 
 
-> **Nome do sistema:** ``nome-fantasia`` - Aplicativo de compra de ingressos <br>
+> **Nome do sistema:** ``ScalperObliterator3000`` - Aplicativo de compra de ingressos <br>
 > **Repositório:** [https://github.com/R-ZW/tc-seminario](https://github.com/R-ZW/tc-seminario)<br>
-> **Justificativa:** [...]
+> **Vídeo de apresentação T1:** [link](#) <br>
+> **Vídeo de apresentação T2:** [link](#) <br>
+> **Justificativa:** A venda de ingressos em eventos de alta demanda expõe um conflito concreto entre distribuição justa e aquisição em escala para revenda. O limite por conta pode ser contornado com múltiplas contas; verificações adicionais provocam novas adaptações do revendedor e podem dificultar compras legítimas. O recorte permite analisar esse ciclo e é viável para uma implementação simulada no Trabalho 2. 
 
 ### 👥 Integrantes:
 
@@ -27,10 +29,21 @@
 ### 3. [🔀 Modelo estratégico dinâmico](#)
 ### 4. [⚠️ Ameaças e riscos](#)
 
+---
 
 ## 📋 1. Descrição do sistema adversarial
 
-[...]
+### 1.1 Sistema e recorte da interação
+
+O sistema é uma plataforma hipotética de venda online de ingressos para diferentes eventos. Pessoas interessadas podem criar uma conta, consultar a disponibilidade, selecionar ingressos e concluir uma compra. Após a confirmação, a plataforma emite ingressos digitais. Para esta análise, consideramos **a venda de ingressos de um evento específico de alta demanda**, com quantidade limitada de ingressos e sem assentos numerados. Nesse evento, a regra inicial permite comprar **até quatro ingressos por conta**, com a intenção de distribuir as oportunidades de compra entre mais pessoas.
+
+O recorte deste trabalho é a **aquisição de ingressos acima desse limite por um mesmo interessado**, que pode controlar ou coordenar várias contas para reunir ingressos destinados à revenda. Analisaremos como a plataforma decide aceitar, limitar ou submeter compras a verificações adicionais; quais respostas o interessado consegue observar; e como ambos podem ajustar suas decisões nas tentativas seguintes. Compradores legítimos também participam desse cenário, pois medidas contra compras coordenadas podem dificultar o acesso de pessoas que seguem as regras.
+
+A análise se concentra no processo de compra, da criação ou utilização de uma conta até a emissão do ingresso. A revenda fora da plataforma, o processamento real de pagamentos e a operação de entrada no evento não serão modelados como fluxos principais. A validação do ingresso na entrada poderá ser considerada como controle posterior, caso ajude a avaliar os efeitos e limites das defesas adotadas durante a compra.
+
+> - **Sistema:** plataforma de venda de ingressos para diferentes eventos.
+> - **Recorte:** compra em um evento de alta demanda, limitada a quatro ingressos por conta.
+> - **Conflito:** um revendedor coordena contas para superar o limite; a plataforma busca preservar o acesso dos compradores legítimos.
 
 ## ♟️ 2. Modelo estratégico estático
 
