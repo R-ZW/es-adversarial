@@ -79,6 +79,10 @@ O diagrama de contexto segue o [modelo C4](https://c4model.com/diagrams/system-c
 
 [Arquivo-fonte editável do diagrama em Structurizr DSL](diagramas/contexto.dsl).
 
+### 1.5 Por que a interação é adversarial
+
+A interação é adversarial porque o revendedor tenta **deliberadamente contornar o limite de quatro ingressos por conta** para concentrar ingressos e revendê-los, enquanto a plataforma busca distribuí-los de forma justa sem prejudicar compradores legítimos. Ao observar compras aceitas, recusas ou pedidos de verificação, o revendedor pode mudar de conta, rede ou comprador intermediário; a plataforma, por sua vez, observa as tentativas e ajusta seus controles. Portanto, o conflito não decorre de um erro isolado: os participantes têm objetivos diferentes e adaptam suas decisões às respostas um do outro.
+
 ## ♟️ 2. Modelo estratégico estático
 
 [...]
