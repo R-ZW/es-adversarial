@@ -1,0 +1,81 @@
+@startuml
+title Ciclo adaptativo da compra de ingressos
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam activityBorderColor #40566B
+skinparam activityBackgroundColor #F4F7FA
+skinparam activityDiamondBorderColor #40566B
+skinparam ArrowColor #40566B
+
+|Revendedor|
+start
+:R1 — Tenta comprar mais de quatro
+ingressos com uma conta;
+
+|Plataforma e administrador|
+:Aplica o limite de quatro por conta
+e recusa o excedente;
+
+|Revendedor|
+:Observa que a cota é por conta;
+:Adapta: cria ou controla
+várias contas;
+:R2 — Compra até quatro ingressos
+em cada conta;
+
+|Plataforma e administrador|
+:Observa tentativas no mesmo IP;
+:Correlaciona as contas e retém
+compras para revisão;
+note right
+  Compradores legítimos na mesma rede
+  também podem sofrer atrasos.
+end note
+
+|Revendedor|
+:Observa a retenção das compras
+feitas no mesmo IP;
+:Adapta: usa VPN ou redes distintas;
+:R3 — Repete as compras com
+contas e IPs diferentes;
+
+|Plataforma e administrador|
+:Observa o limite da correlação por IP;
+:Passa a exigir identidade verificada
+para comprar nesse evento;
+note right
+  A verificação exige tempo e dados
+  também dos compradores legítimos.
+end note
+
+|Revendedor|
+:Observa que mudar de IP
+já não evita a verificação;
+:Adapta: recruta pessoas reais
+para comprar em seus nomes;
+:R4 — Coordena compras feitas
+por intermediários verificados;
+
+|Plataforma e administrador|
+:Observa compras com identidades válidas;
+:Emite ingressos nominais e restringe
+transferências;
+note right
+  A conferência do titular na entrada
+  é um controle posterior à compra.
+  Transferências legítimas também
+  ficam mais difíceis.
+end note
+
+|Revendedor|
+:Observa que o repasse dos ingressos
+se tornou mais difícil;
+:Adapta: testa transferências permitidas
+ou compras em nome do destinatário final;
+:Risco residual e possibilidade
+de novas rodadas;
+stop
+
+@enduml

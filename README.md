@@ -89,7 +89,24 @@ A interação é adversarial porque o revendedor tenta **deliberadamente contorn
 
 ## 🔀 3. Modelo estratégico dinâmico
 
-[...]
+### 3.1 Rodadas adversariais
+
+As rodadas partem do limite inicial de quatro ingressos por conta. Em cada uma, o revendedor mantém o objetivo de concentrar ingressos, mas altera o meio usado após observar a resposta da plataforma.
+
+| Rodada | Ação do participante | Resposta do sistema ou defensor | O que se torna observável? | Adaptação para a rodada seguinte |
+| :--- | :--- | :--- | :--- | :--- |
+| **1 — Limite por conta** | O revendedor tenta comprar mais de quatro ingressos para o mesmo evento usando uma conta. | A plataforma aplica o limite de quatro ingressos por conta e recusa o excedente. | A recusa revela que a cota é aplicada à conta, inclusive quando há compras anteriores. | O revendedor cria ou controla várias contas e compra até quatro ingressos em cada uma. |
+| **2 — Correlação por IP** | O revendedor usa contas diferentes para comprar mais ingressos do mesmo evento. | Ao identificar tentativas vindas do mesmo IP, a plataforma correlaciona as contas e retém temporariamente essas compras para revisão, sem tratar o IP como prova de identidade. | O revendedor percebe que compras no mesmo IP ficam retidas. Compradores legítimos que compartilham uma rede também podem sofrer atrasos. | O revendedor distribui as tentativas por VPN ou por redes diferentes. |
+| **3 — Verificação de identidade** | O revendedor continua as compras por contas e IPs diferentes. | Ao reconhecer que o IP não basta para limitar compras coordenadas, o administrador passa a exigir uma identidade verificada para comprar ingressos desse evento. | Fica visível que mudar de IP já não elimina a exigência. Compradores legítimos passam a gastar mais tempo e fornecer dados para concluir a compra. | O revendedor recruta pessoas reais para comprar em seus próprios nomes e depois repassar os ingressos. |
+| **4 — Ingressos nominais** | O revendedor coordena compras feitas por intermediários com identidades válidas. | A plataforma vincula cada ingresso ao titular identificado, restringe a transferência e prevê a conferência do titular na entrada como controle posterior. | Os ingressos são emitidos, mas seu repasse se torna mais difícil. Compradores legítimos também podem enfrentar restrições de transferência e demora na entrada. | O revendedor testa as transferências permitidas ou tenta coordenar compras já em nome dos destinatários finais; permanece risco residual. |
+
+### 3.2 Diagrama do ciclo adaptativo
+
+O fluxograma em raias acompanha as quatro rodadas da tabela. As respostas da plataforma revelam informações ao revendedor; as tentativas observadas também orientam as mudanças do lado defensor. As notas indicam efeitos das defesas sobre compradores legítimos. A conferência na entrada aparece apenas como controle posterior, fora do fluxo principal de compra.
+
+![Fluxograma em raias do ciclo adaptativo entre revendedor e plataforma](diagramas/ciclo-adaptativo.png)
+
+[Arquivo-fonte editável do diagrama em PlantUML](diagramas/src/ciclo-adaptativo.puml).
 
 ## ⚠️ 4. Ameaças e riscos
 
