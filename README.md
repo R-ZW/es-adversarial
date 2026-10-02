@@ -71,6 +71,14 @@ Para reconhecer compras possivelmente relacionadas, a plataforma pode observar *
 > - **Sinais possíveis:** conta, horário, quantidade, IP e, se exigida, identidade verificada.
 > - **Limite dos controles:** contas, redes e identidades distintas não garantem compradores independentes.
 
+### 1.4 Diagrama de contexto
+
+O diagrama de contexto segue o [modelo C4](https://c4model.com/diagrams/system-context) e foi definido em [Structurizr DSL](https://docs.structurizr.com/dsl/cookbook/system-context-view/): o **ScalperObliterator3000** é o sistema em análise; comprador legítimo, revendedor e administrador são pessoas que interagem com ele. O serviço de pagamento aparece apenas como dependência externa da compra, sem detalhar seu processamento. A verificação de identidade é uma integração **eventual**, acionada somente se esse controle for adotado em uma rodada posterior.
+
+![Diagrama C4 de contexto do ScalperObliterator3000](diagramas/contexto.png)
+
+[Arquivo-fonte editável do diagrama em Structurizr DSL](diagramas/contexto.dsl).
+
 ## ♟️ 2. Modelo estratégico estático
 
 [...]
