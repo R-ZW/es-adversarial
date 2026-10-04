@@ -212,3 +212,13 @@ O diagrama segue o fluxo de compra da esquerda para a direita, do cadastro à em
 ![Diagrama de superfície de ataque do ScalperObliterator3000](diagramas/superficie-de-ataque.png)
 
 [Arquivo-fonte editável do diagrama em SVG](diagramas/src/superficie-de-ataque.svg).
+
+### 4.3 Cenários de ameaça
+
+Os cenários usam o prefixo **AM** para não serem confundidos com as estratégias A1 a A4 do revendedor na seção 2.
+
+- **AM1:** Um **revendedor** pode **comprar quatro ingressos em cada uma de várias contas que controla** por meio do **cadastro de contas e da regra de limite por conta (E1, E2)**, aproveitando **o pressuposto de que cada interessado usa uma única conta (P1)**, causando **a concentração de ingressos acima da cota** sobre **a distribuição justa do estoque**.
+- **AM2:** Um **revendedor** pode **distribuir as compras de suas contas por VPN ou redes diferentes** por meio da **correlação por IP (E3)**, aproveitando **o pressuposto de que o IP revela compras coordenadas (P2)**, causando **compras coordenadas não detectadas enquanto compradores legítimos em redes compartilhadas são retidos** sobre **a distribuição justa e o acesso dos compradores legítimos**.
+- **AM3:** Um **revendedor** pode **recrutar intermediários reais para comprar em seus próprios nomes e repassar os ingressos** por meio da **verificação de identidade (E5)**, aproveitando **o pressuposto de que identidade verificada impede a concentração (P3)**, causando **concentração com identidades válidas, difícil de distinguir de compras legítimas** sobre **a distribuição justa do estoque**.
+- **AM4:** Um **revendedor** pode **fazer compras de teste e comparar aceites, retenções e recusas** por meio das **respostas observáveis da compra (E4)**, aproveitando **o fato de que respostas detalhadas dão pistas dos critérios internos de detecção**, causando **a adaptação mais rápida e barata às defesas** sobre **a eficácia dos controles da plataforma**.
+- **AM5:** Um **revendedor** pode **repassar ingressos nominais por transferências permitidas ou comprar já em nome do destinatário final** por meio da **titularidade e transferência do ingresso (E6)**, aproveitando **o pressuposto de que o titular registrado é quem vai ao evento**, causando **a revenda de ingressos que passaram por todos os controles da compra** sobre **a distribuição justa e a confiança no ingresso nominal**.
