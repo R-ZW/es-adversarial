@@ -5,7 +5,7 @@ Análise de uma plataforma hipotética de venda de ingressos para diferentes eve
 ## 🆔 Identificação 
 
 > **Nome do sistema:** ``ScalperObliterator3000`` - Aplicativo de compra de ingressos <br>
-> **Repositório:** [https://github.com/R-ZW/tc-seminario](https://github.com/R-ZW/tc-seminario)<br>
+> **Repositório:** [https://github.com/R-ZW/es-adversarial](https://github.com/R-ZW/es-adversarial)<br>
 > **Vídeo de apresentação T1:** [link](#) <br>
 > **Vídeo de apresentação T2:** [link](#) <br>
 > **Justificativa:** A venda de ingressos em eventos de alta demanda expõe um conflito concreto entre distribuição justa e aquisição em escala para revenda. O limite por conta pode ser contornado com múltiplas contas; verificações adicionais provocam novas adaptações do revendedor e podem dificultar compras legítimas. O recorte permite analisar esse ciclo e é viável para uma implementação simulada no Trabalho 2. 
@@ -77,7 +77,7 @@ O diagrama de contexto segue o [modelo C4](https://c4model.com/diagrams/system-c
 
 ![Diagrama C4 de contexto do ScalperObliterator3000](diagramas/contexto.png)
 
-[Arquivo-fonte editável do diagrama em Structurizr DSL](diagramas/contexto.dsl).
+[Arquivo-fonte editável do diagrama em Structurizr DSL](diagramas/src/contexto.dsl).
 
 ### 1.5 Por que a interação é adversarial
 
