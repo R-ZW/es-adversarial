@@ -204,3 +204,11 @@ Os pontos de exploração foram extraídos do fluxo de compra (seção 1.1), dos
 | **E4** | Respostas observáveis da compra | Aceite, retenção, recusa e pedido de verificação | Cada resposta dá pistas de qual sinal o sistema usa e de qual variação passa, embora o revendedor não conheça diretamente os critérios internos (seção 1.2). | Todas |
 | **E5** | Verificação de identidade | Integração eventual com o serviço externo | Uma identidade válida não prova que o comprador age por conta própria (P3). | 3 e 4 |
 | **E6** | Titularidade e transferência do ingresso | Emissão de ingresso nominal e conferência na entrada | As transferências permitidas e a conferência na entrada podem ser usadas para repassar ingressos. | 4 |
+
+### 4.2 Diagrama de superfície de ataque
+
+O diagrama segue o fluxo de compra da esquerda para a direita, do cadastro à emissão do ingresso, e mostra os sistemas externos envolvidos. Componentes com borda vermelha são pontos de exploração, com a fraqueza correspondente (E1 a E6) escrita no próprio componente. Setas laranja são ações do revendedor; a seta laranja tracejada que volta da resposta da compra representa o canal de observação usado em todas as rodadas. O painel do administrador aplica os controles ajustados nas rodadas da seção 3: o limite na compra, os sinais da correlação e a emissão de ingressos nominais. Elementos cinza tracejados são controles eventuais (verificação de identidade) ou posteriores à compra (conferência na entrada).
+
+![Diagrama de superfície de ataque do ScalperObliterator3000](diagramas/superficie-de-ataque.png)
+
+[Arquivo-fonte editável do diagrama em SVG](diagramas/src/superficie-de-ataque.svg).
