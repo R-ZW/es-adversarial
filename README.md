@@ -24,12 +24,14 @@ Análise de uma plataforma hipotética de venda de ingressos para diferentes eve
 
 ## Sumário
 
-### 1. [📋 Descrição do sistema adversarial](#)
-### 2. [♟️ Modelo estratégico estático](#)
-### 3. [🔀 Modelo estratégico dinâmico](#)
-### 4. [⚠️ Ameaças e riscos](#)
+### 1. [📋 Descrição do sistema adversarial](#descricao-do-sistema)
+### 2. [♟️ Modelo estratégico estático](#modelo-estatico)
+### 3. [🔀 Modelo estratégico dinâmico](#modelo-dinamico)
+### 4. [⚠️ Ameaças e riscos](#ameacas-e-riscos)
 
 ---
+
+<a id="descricao-do-sistema"></a>
 
 ## 📋 1. Descrição do sistema adversarial
 
@@ -83,7 +85,9 @@ O diagrama de contexto segue o [modelo C4](https://c4model.com/diagrams/system-c
 
 A interação é adversarial porque o revendedor tenta **deliberadamente contornar o limite de quatro ingressos por conta** para concentrar ingressos e revendê-los, enquanto a plataforma busca distribuí-los de forma justa sem prejudicar compradores legítimos. Ao observar compras aceitas, recusas ou pedidos de verificação, o revendedor pode mudar de conta, rede ou comprador intermediário; a plataforma, por sua vez, observa as tentativas e ajusta seus controles. Portanto, o conflito não decorre de um erro isolado: os participantes têm objetivos diferentes e adaptam suas decisões às respostas um do outro.
 
-### ♟️ 2. Modelo estratégico estático
+<a id="modelo-estatico"></a>
+
+## ♟️ 2. Modelo estratégico estático
 
 ### 2.1 Jogadores, informação e recorte
 
@@ -154,6 +158,8 @@ O jogo é de uma rodada: não captura aprendizado, reputação nem a descoberta 
 Não há estratégias mistas nem crença do defensor sobre a proporção de revendedores, e os erros de classificação (P2) entram apenas indiretamente, via atrito.
 O comprador legítimo é modelado só pelo atrito e não escolhe estratégia.
 
+<a id="modelo-dinamico"></a>
+
 ## 🔀 3. Modelo estratégico dinâmico
 
 ### 3.1 Rodadas adversariais
@@ -182,6 +188,8 @@ O fluxograma em raias acompanha as quatro rodadas da tabela. As respostas da pla
 - **O que dispara uma adaptação?** Uma recusa ou retenção revela um limite ao revendedor; a plataforma adapta os controles quando observa padrões de tentativas que sugerem concentração ou quando uma defesa anterior se mostra insuficiente.
 - **Quais são os custos?** Para o revendedor, são custos de manter contas, coordenar tentativas e recrutar intermediários, além do risco de perder compras. Para a plataforma, são custos operacionais e de tratamento de dados; para compradores legítimos, há tempo, verificações, recusas indevidas e restrições de transferência.
 - **Onde pode surgir uma corrida armamentista?** Quando cada nova defesa leva o revendedor a adotar outro meio de coordenação e essa mudança leva a plataforma a impor controles mais abrangentes. O ciclo pode elevar custos e falsos positivos sem eliminar completamente a concentração de ingressos.
+
+<a id="ameacas-e-riscos"></a>
 
 ## ⚠️ 4. Ameaças e riscos
 
