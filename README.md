@@ -151,7 +151,23 @@ A cadeia A2 → D2 → A3 → D3 → A4 → D4 ilustra as adaptações estratég
 
 **Sensibilidade.** O equilíbrio depende do payoff do revendedor em (A4, D4). Se ele cair de 2 para 0, por exemplo devido ao custo dos intermediários ou à dificuldade de repasse, A1 passa a ser preferível a A4 contra D4 e deixa de existir equilíbrio em estratégias puras. Seria então necessário analisar estratégias mistas ou rever o conjunto de estratégias; a ausência de equilíbrio puro, por si só, não implica que os jogadores tenham de alternar de forma determinística.
 
-### 2.6 Limitações
+### 2.6 Decisão central em formato 2 × 2
+
+A decisão central é o recorte **A1/A2 × D1/D3** da matriz da seção 2.4: o revendedor decide se **contorna a cota com várias contas**, e a plataforma decide se **exige identidade verificada**. Os payoffs foram reescritos como ordem de preferência de cada jogador (0 = pior, 2 = melhor), sem mudar a ordem que eles têm na matriz completa. Cada célula traz **(revendedor, defensor)**, e o negrito marca a melhor resposta, como na seção 2.4.
+
+| Revendedor \ Defensor | **D1** Só limite por conta | **D3** Exige identidade verificada |
+| :-- | :--: | :--: |
+| **A1** Conta única | (1, **2**) | (**1**, 1) |
+| **A2** Várias contas | (**2**, 0) | (0, **1**) |
+
+1. **O que representa cada ação.** A1: comprar só os quatro ingressos de uma conta. A2: controlar várias contas e comprar quatro em cada uma. D1: aplicar só o limite por conta. D3: pedir identidade verificada antes da compra, para todos os compradores do evento.
+2. **Por que cada payoff.** Para o revendedor, A2 contra D1 é o melhor resultado (2), porque acumula ingressos sem custo extra; A1 rende 1 nas duas colunas, porque são só quatro ingressos, com ou sem verificação; A2 contra D3 é o pior (0), porque ele paga pelas contas e a verificação barra as compras extras. Para o defensor, A1 contra D1 é o melhor (2): ninguém excede a cota e ninguém sofre atrito; D3 rende 1 nas duas linhas, porque contém as contas extras mas cobra tempo e dados de todos; A2 contra D1 é o pior (0), porque o revendedor tira ingressos dos legítimos sem reação.
+3. **Melhores respostas.** Contra D1, o revendedor prefere A2 (2 > 1); contra D3, prefere A1 (1 > 0). Contra A1, o defensor prefere D1 (2 > 1); contra A2, prefere D3 (1 > 0).
+4. **Estratégia dominante.** Nenhum dos dois tem: a melhor ação de cada um muda conforme a escolha do outro.
+5. **Resultado em que ninguém melhora mudando sozinho.** Não existe em estratégias puras: em toda célula algum jogador ganha ao trocar de ação (com payoffs apenas ordinais, não calculamos equilíbrio em estratégias mistas). Partindo de (A1, D1), o revendedor passa para A2; o defensor responde com D3; o revendedor volta para A1; e, sem compras coordenadas, a verificação só cobraria atrito, então D1 volta a ser melhor. Esse giro é o que a seção 3 acompanha rodada a rodada; com as demais estratégias da matriz completa, a cadeia segue até (A4, D4), como mostra a seção 2.5.
+6. **Se o resultado é bom para o sistema e para os legítimos.** O melhor resultado para o sistema e para os compradores legítimos é (A1, D1): cota respeitada e compra sem atrito. Ele não se sustenta, porque o revendedor ganha ao desviar para A2. A resposta que contém esse desvio (D3) recai sobre todos: os legítimos passam a verificar a identidade mesmo sem ter feito nada errado.
+
+### 2.7 Limitações
 
 Os valores são ordinais e ilustrativos. As conclusões qualitativas (cadeia de melhores respostas, equilíbrio em A4/D4, custo para o legítimo) dependem da ordem entre os payoffs, e não dos números exatos. No Trabalho 2, a simulação pode calibrá-los.
 O jogo é de uma rodada: não captura aprendizado, reputação nem a descoberta gradual dos critérios de detecção, tratados na seção 3.
