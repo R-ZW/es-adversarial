@@ -16,7 +16,7 @@ Análise de uma plataforma hipotética de venda de ingressos para diferentes eve
 |----------------------------|---------------------------------------|-------------|
 | ```INARI18```              | Beatriz Roland Machado                | 0000000000  |
 | ```CristhianKapelinski```  | Cristhian Eduardo Kapelinski de Avila | 0000000000  |
-| ```guimsk```               | Guilherme Muller Schweitzer Klauberg  | 0000000000  |
+| ```guimsk```               | Guilherme Muller Schweitzer Klauberg  | 23101015  |
 | ```chicosbg```             | Luis Francisco Brum Gomes             | 0000000000  |
 | ```R-ZW```                 | Reinaldo Zimmer Wendt                 | 2310100642  |
 
@@ -83,9 +83,91 @@ O diagrama de contexto segue o [modelo C4](https://c4model.com/diagrams/system-c
 
 A interação é adversarial porque o revendedor tenta **deliberadamente contornar o limite de quatro ingressos por conta** para concentrar ingressos e revendê-los, enquanto a plataforma busca distribuí-los de forma justa sem prejudicar compradores legítimos. Ao observar compras aceitas, recusas ou pedidos de verificação, o revendedor pode mudar de conta, rede ou comprador intermediário; a plataforma, por sua vez, observa as tentativas e ajusta seus controles. Portanto, o conflito não decorre de um erro isolado: os participantes têm objetivos diferentes e adaptam suas decisões às respostas um do outro.
 
-## ♟️ 2. Modelo estratégico estático
+### ♟️ 2. Modelo estratégico estático
 
-[...]
+### 2.1 Jogadores, informação e recorte
+
+O modelo estático fixa uma única janela de venda do evento de alta demanda e analisa uma decisão simultânea entre dois jogadores: o revendedor e o defensor (plataforma e administrador, conforme a seção 1.2). Cada um escolhe sua estratégia sem observar a escolha do outro. É um jogo de informação imperfeita: a plataforma não sabe com certeza quem controla cada conta (P1 a P3), e o revendedor não conhece os critérios internos de detecção.
+
+O comprador legítimo não é jogador estratégico, porque segue as regras e não adapta seu comportamento ao conflito. Seus custos entram na utilidade do defensor como atrito: demora, recusas indevidas e exposição de dados.
+
+### 2.2 Estratégias
+
+As estratégias correspondem aos meios das quatro rodadas da seção 3, tratados aqui como alternativas simultâneas.
+
+### Revendedor (ID: Descrição)
+
+A1:	Conta única	Compra até o limite de quatro ingressos em uma só conta, sem tentar contornar a regra.
+
+A2:	Várias contas, mesma rede	Controla várias contas e compra quatro ingressos em cada uma, a partir do mesmo IP.
+
+A3:	Várias contas, redes distintas	Igual a A2, mas distribui as tentativas por VPN ou redes diferentes.
+
+A4:	Intermediários reais	Recruta pessoas com identidades válidas para comprar em seus nomes e repassar os ingressos.
+
+### Defensor (ID: Descrição)
+
+D1: Limite por conta	Aplica apenas o limite de quatro ingressos por conta.
+
+D2: Limite + correlação por IP	Correlaciona contas pelo IP e retém compras suspeitas para revisão.
+
+D3: Identidade verificada	Exige identidade verificada para comprar ingressos do evento.
+
+D4: Ingressos nominais	Além da identidade, vincula o ingresso ao titular, restringe transferências e prevê conferência na entrada.
+
+### 2.3 Utilidades
+
+As utilidades usam uma escala ordinal de 0 a 10, que só compara resultados e não mede valores monetários.
+
+Revendedor: receita esperada da revenda, menos o custo de operar o esquema (contas, VPN, recrutamento de intermediários) e menos as perdas por retenção ou recusa.
+Defensor: parcela do estoque que chega a compradores legítimos, menos o atrito imposto a eles e o custo operacional dos controles.
+
+###  Premissas que sustentam os valores:
+
+A1: rende pouco ao revendedor (só quatro ingressos), mas não custa nada nem gera atrito.
+
+A2: é lucrativa contra D1 e barata, mas é neutralizada por D2, D3 e D4.
+
+A3: custa mais que A2 (VPN, gestão de redes). Escapa de D2, mas não de D3 e D4, que não dependem do IP.
+
+A4: tem custo fixo de recrutamento e repasse. Atravessa D1, D2 e D3 porque as identidades são válidas, e perde valor sob D4 porque a revenda fica difícil.
+
+D2: cria atrito moderado (redes compartilhadas podem ser retidas). D3 e D4 criam atrito crescente (tempo, dados, restrição de transferência e conferência na entrada), e D4 é a defesa mais custosa para quem compra legitimamente.
+
+### 2.4 Matriz de payoffs
+
+Cada célula traz **(revendedor, defensor)**. Os valores em **negrito** marcam a melhor resposta do jogador naquela linha ou coluna.
+
+| Revendedor \ Defensor | **D1** Limite por conta | **D2** + correlação por IP | **D3** + identidade | **D4** + ingressos nominais |
+| :-- | :--: | :--: | :--: | :--: |
+| **A1** Conta única | (1, **8**) | (1, 7) | (1, 5) | (1, 4) |
+| **A2** Várias contas, mesma rede | (**8**, 2) | (1, **7**) | (0, 5) | (0, 4) |
+| **A3** Várias contas, redes distintas | (7, 2) | (**6**, 3) | (1, **5**) | (0, 4) |
+| **A4** Intermediários reais | (5, 3) | (5, 2) | (**5**, 2) | (**2**, **4**) |
+
+### 2.5 Análise
+
+Melhores respostas. Cada defesa tem uma melhor resposta do revendedor, e vice-versa:
+
+Contra D1, o revendedor responde com A2; contra D2, com A3; contra D3 e D4, com A4.
+Contra A1, o defensor responde com D1; contra A2, com D2; contra A3, com D3; contra A4, com D4.
+
+A sequência A2 → D2 → A3 → D3 → A4 → D4 reproduz as quatro rodadas da seção 3, ou seja, o ciclo adaptativo aparece aqui como a cadeia de melhores respostas.
+
+Equilíbrio de Nash em estratégias puras. O único é (A4, D4), com payoffs (2, 4). É a única célula em que ambos estão em melhor resposta, e nenhum tem incentivo a desviar sozinho. Isso coincide com o risco residual da rodada 4: mesmo sob a defesa mais forte, o revendedor ainda prefere recrutar intermediários a desistir.
+
+Dominância. A4 domina estritamente A1 (5, 5, 5, 2 contra 1, 1, 1, 1). Neste modelo, "cumprir a regra" nunca é a melhor escolha de um revendedor. As demais estratégias do revendedor não se dominam entre si, porque cada uma é a melhor resposta a alguma defesa.
+
+Custo do equilíbrio para o defensor. No equilíbrio, o defensor recebe 4, contra 8 em (A1, D1). A defesa mais robusta é a que mais pesa sobre os compradores legítimos, que absorvem o atrito da verificação, das restrições de transferência e da espera na entrada. O defensor não consegue eliminar a concentração; ele só a torna menos lucrativa, ao custo de dificultar a compra honesta.
+
+Sensibilidade. O equilíbrio depende do payoff do revendedor em (A4, D4). Se ele cair abaixo de 1, por exemplo com fiscalização forte na entrada ou intermediários caros, A1 passa a ser preferível a A4 e o equilíbrio em estratégias puras deixa de existir. Nesse caso, os jogadores teriam de alternar entre estratégias, o que dá sentido ao modelo dinâmico.
+
+### 2.6 Limitações
+
+Os valores são ordinais e ilustrativos. As conclusões qualitativas (cadeia de melhores respostas, equilíbrio em A4/D4, custo para o legítimo) dependem da ordem entre os payoffs, e não dos números exatos. No Trabalho 2, a simulação pode calibrá-los.
+O jogo é de uma rodada: não captura aprendizado, reputação nem a descoberta gradual dos critérios de detecção, tratados na seção 3.
+Não há estratégias mistas nem crença do defensor sobre a proporção de revendedores, e os erros de classificação (P2) entram apenas indiretamente, via atrito.
+O comprador legítimo é modelado só pelo atrito e não escolhe estratégia.
 
 ## 🔀 3. Modelo estratégico dinâmico
 
