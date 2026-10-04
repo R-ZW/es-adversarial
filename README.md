@@ -222,3 +222,23 @@ Os cenários usam o prefixo **AM** para não serem confundidos com as estratégi
 - **AM3:** Um **revendedor** pode **recrutar intermediários reais para comprar em seus próprios nomes e repassar os ingressos** por meio da **verificação de identidade (E5)**, aproveitando **o pressuposto de que identidade verificada impede a concentração (P3)**, causando **concentração com identidades válidas, difícil de distinguir de compras legítimas** sobre **a distribuição justa do estoque**.
 - **AM4:** Um **revendedor** pode **fazer compras de teste e comparar aceites, retenções e recusas** por meio das **respostas observáveis da compra (E4)**, aproveitando **o fato de que respostas detalhadas dão pistas dos critérios internos de detecção**, causando **a adaptação mais rápida e barata às defesas** sobre **a eficácia dos controles da plataforma**.
 - **AM5:** Um **revendedor** pode **repassar ingressos nominais por transferências permitidas ou comprar já em nome do destinatário final** por meio da **titularidade e transferência do ingresso (E6)**, aproveitando **o pressuposto de que o titular registrado é quem vai ao evento**, causando **a revenda de ingressos que passaram por todos os controles da compra** sobre **a distribuição justa e a confiança no ingresso nominal**.
+
+### 4.4 Avaliação de riscos
+
+Escala de 1 a 3 para probabilidade e impacto; risco = probabilidade × impacto.
+
+| ID | Cenário de ameaça | Ponto de exploração | Pressuposto ou fraqueza | Ativo afetado | Probabilidade | Impacto | Risco |
+| --- | --- | --- | --- | --- | ---: | ---: | ---: |
+| **AM1** | Várias contas com quatro ingressos cada | E1, E2 | P1: uma conta por interessado | Distribuição justa do estoque | 3 | 3 | **9** |
+| **AM2** | Contas distribuídas por VPN ou redes diferentes | E3 | P2: IP indica compras coordenadas | Distribuição justa; acesso dos legítimos | 2 | 3 | **6** |
+| **AM3** | Intermediários reais com identidade válida | E5 | P3: identidade impede concentração | Distribuição justa do estoque | 2 | 3 | **6** |
+| **AM4** | Sondagem dos critérios pelas respostas | E4 | Respostas detalhadas dão pistas dos critérios | Eficácia dos controles | 3 | 2 | **6** |
+| **AM5** | Repasse de ingressos nominais | E6 | Titular registrado é quem vai ao evento | Distribuição justa; confiança no ingresso | 2 | 2 | **4** |
+
+Justificativa das notas:
+
+- **AM1** tem probabilidade alta porque, sob a regra inicial (D1), é a melhor resposta do revendedor (A2 na seção 2.4) e custa pouco. O impacto é alto porque cada conta extra retira quatro ingressos do estoque dos compradores legítimos.
+- **AM2** só faz sentido depois que a correlação por IP é adotada e exige gerenciar redes para muitas contas, por isso a probabilidade é média. O impacto continua alto: a concentração é a mesma de AM1 e a defesa ainda retém compradores legítimos.
+- **AM3** exige recrutar, pagar e coordenar pessoas, o que reduz a probabilidade. O impacto é alto porque cada intermediário é indistinguível de um comprador legítimo.
+- **AM4** tem probabilidade alta porque toda tentativa já gera uma resposta, sem custo adicional. O impacto é médio porque a sondagem não concentra ingressos por si só, mas acelera AM1 a AM3.
+- **AM5** só ocorre na rodada 4 e depende de transferências permitidas ou de uma conferência falha na entrada, por isso probabilidade e impacto são médios.
