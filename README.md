@@ -30,6 +30,7 @@ Análise de uma plataforma hipotética de venda de ingressos para diferentes eve
 ### 4. [⚠️ Ameaças e riscos](#ameacas-e-riscos)
 ### 5. [🏁 Conclusão](#conclusao)
 ### 6. [📚 Referências](#referencias)
+### 7. [🤝 Contribuições](#contribuicoes)
 
 ---
 
@@ -293,3 +294,17 @@ Probabilidade e impacto em escala de 1 a 3; risco = probabilidade × impacto.
 ## 📚 6. Referências
 
 As fontes usadas (aulas da disciplina, teoria dos jogos e documentação das ferramentas de diagrama) estão em [`fontes/referencias.md`](fontes/referencias.md), com a seção do relatório em que cada uma foi usada.
+
+<a id="contribuicoes"></a>
+
+## 🤝 7. Contribuições
+
+Resumo do que cada integrante fez no relatório, conforme o histórico de commits do repositório.
+
+| Integrante | Contribuição |
+| --- | --- |
+| Beatriz Roland Machado | Seção 4: pontos de exploração, diagrama de superfície de ataque, cenários de ameaça, avaliação de riscos e resposta à ameaça prioritária. |
+| Cristhian Eduardo Kapelinski de Avila | Revisão do relatório contra o enunciado: decisão central em formato 2 × 2 (seção 2.6), conclusão, referências e correção de links e do sumário. |
+| Guilherme Muller Schweitzer Klauberg | Seção 2: estratégias, utilidades, matriz de payoffs e análise do modelo estático. |
+| Luis Francisco Brum Gomes | Revisão da seção 2 (estratégias em tabela e justificativa dos payoffs) e seção 3.3 (observação, adaptação e custos). |
+| Reinaldo Zimmer Wendt | Estrutura do README, seção 1 completa com o diagrama de contexto, e seção 3.1 com o diagrama do ciclo adaptativo. |
