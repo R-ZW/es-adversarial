@@ -31,6 +31,7 @@ Análise de uma plataforma hipotética de venda de ingressos para diferentes eve
 ### 5. [🏁 Conclusão](#conclusao)
 ### 6. [📚 Referências](#referencias)
 ### 7. [🤝 Contribuições](#contribuicoes)
+### 8. [🤖 Uso de IA generativa](#uso-de-ia)
 
 ---
 
@@ -308,3 +309,11 @@ Resumo do que cada integrante fez no relatório, conforme o histórico de commit
 | Guilherme Muller Schweitzer Klauberg | Seção 2: estratégias, utilidades, matriz de payoffs e análise do modelo estático. |
 | Luis Francisco Brum Gomes | Revisão da seção 2 (estratégias em tabela e justificativa dos payoffs) e seção 3.3 (observação, adaptação e custos). |
 | Reinaldo Zimmer Wendt | Estrutura do README, seção 1 completa com o diagrama de contexto, e seção 3.1 com o diagrama do ciclo adaptativo. |
+
+<a id="uso-de-ia"></a>
+
+## 🤖 8. Uso de IA generativa
+
+- **Ferramenta:** Claude Code (Anthropic).
+- **Tarefas:** conferir o relatório contra o enunciado, redigir e revisar trechos do texto, montar as referências e corrigir links.
+- **Verificação:** cada item foi conferido com o checklist do enunciado; os payoffs da seção 2.6 foram conferidos contra a matriz da seção 2.4; os links das referências foram abertos um a um; e o texto gerado foi lido e ajustado antes de entrar no relatório.
