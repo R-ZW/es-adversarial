@@ -17,7 +17,7 @@ Análise de uma plataforma hipotética de venda de ingressos para diferentes eve
 | ```INARI18```              | Beatriz Roland Machado                | 0000000000  |
 | ```CristhianKapelinski```  | Cristhian Eduardo Kapelinski de Avila | 0000000000  |
 | ```guimsk```               | Guilherme Muller Schweitzer Klauberg  | 23101015  |
-| ```chicosbg```             | Luis Francisco Brum Gomes             | 0000000000  |
+| ```chicosbg```             | Luis Francisco Brum Gomes             | 2310100558  |
 | ```R-ZW```                 | Reinaldo Zimmer Wendt                 | 2310100642  |
 
 ---
