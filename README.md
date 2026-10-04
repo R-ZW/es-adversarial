@@ -194,20 +194,20 @@ O fluxograma em raias acompanha as quatro rodadas da tabela. As respostas da pla
 
 ### 4.1 Pontos de exploração
 
-Os pontos de exploração foram extraídos do fluxo de compra (seção 1.1), dos pressupostos P1 a P3 (seção 1.3) e das rodadas da seção 3. Cada um é uma interface, regra ou componente da plataforma que o revendedor usa para atingir o mesmo objetivo: concentrar ingressos acima da cota.
+Cada ponto é uma interface, regra ou componente que o revendedor usa para concentrar ingressos, ligado aos pressupostos da seção 1.3 e às rodadas da seção 3.
 
-| ID | Ponto de exploração | Componente ou fluxo | Fraqueza explorada | Rodada em que aparece |
-| --- | --- | --- | --- | --- |
-| **E1** | Criação de contas | Cadastro de contas | Criar uma conta nova não custa quase nada ao revendedor (P1). | 1 e 2 |
-| **E2** | Regra de quatro ingressos por conta | Compra e checkout | A cota é contada por conta, não por pessoa (P1). | 1 e 2 |
-| **E3** | Correlação de contas pelo IP | Registro de tentativas | O IP é um indício fraco: muda com VPN e é compartilhado por compradores legítimos (P2). | 2 e 3 |
-| **E4** | Respostas observáveis da compra | Aceite, retenção, recusa e pedido de verificação | Cada resposta dá pistas de qual sinal o sistema usa e de qual variação passa, embora o revendedor não conheça diretamente os critérios internos (seção 1.2). | Todas |
-| **E5** | Verificação de identidade | Integração eventual com o serviço externo | Uma identidade válida não prova que o comprador age por conta própria (P3). | 3 e 4 |
-| **E6** | Titularidade e transferência do ingresso | Emissão de ingresso nominal e conferência na entrada | As transferências permitidas e a conferência na entrada podem ser usadas para repassar ingressos. | 4 |
+| ID | Ponto de exploração | Fraqueza explorada | Rodadas |
+| --- | --- | --- | --- |
+| **E1** | Cadastro de contas | Criar uma conta nova quase não custa (P1). | 1 e 2 |
+| **E2** | Limite de quatro ingressos por conta, na compra | A cota é contada por conta, não por pessoa (P1). | 1 e 2 |
+| **E3** | Correlação por IP, no registro de tentativas | O IP muda com VPN e é compartilhado por compradores legítimos (P2). | 2 e 3 |
+| **E4** | Respostas da compra (aceite, retenção, recusa, verificação) | Cada resposta dá pistas dos critérios internos, que o revendedor não conhece diretamente (seção 1.2). | Todas |
+| **E5** | Verificação de identidade (serviço externo) | Uma identidade válida não prova que o comprador age por conta própria (P3). | 3 e 4 |
+| **E6** | Emissão de ingresso nominal e transferência | Transferências permitidas e a conferência na entrada podem ser usadas para repassar ingressos. | 4 |
 
 ### 4.2 Diagrama de superfície de ataque
 
-O diagrama segue o fluxo de compra da esquerda para a direita, do cadastro à emissão do ingresso, e mostra os sistemas externos envolvidos. Componentes com borda vermelha são pontos de exploração, com a fraqueza correspondente (E1 a E6) escrita no próprio componente. Setas laranja são ações do revendedor; a seta laranja tracejada que volta da resposta da compra representa o canal de observação usado em todas as rodadas. O painel do administrador aplica os controles ajustados nas rodadas da seção 3: o limite na compra, os sinais da correlação e a emissão de ingressos nominais. Elementos cinza tracejados são controles eventuais (verificação de identidade) ou posteriores à compra (conferência na entrada).
+O diagrama segue o fluxo de compra, do cadastro à emissão do ingresso. Componentes com borda vermelha são os pontos E1 a E6, com a fraqueza escrita no próprio componente. Setas laranja são ações do revendedor, e a seta laranja tracejada é o canal de observação usado em todas as rodadas. O painel do administrador aplica os controles ajustados na seção 3: limite, sinais de correlação e ingressos nominais.
 
 ![Diagrama de superfície de ataque do ScalperObliterator3000](diagramas/superficie-de-ataque.png)
 
@@ -215,17 +215,17 @@ O diagrama segue o fluxo de compra da esquerda para a direita, do cadastro à em
 
 ### 4.3 Cenários de ameaça
 
-Os cenários usam o prefixo **AM** para não serem confundidos com as estratégias A1 a A4 do revendedor na seção 2.
+O prefixo **AM** evita confusão com as estratégias A1 a A4 do revendedor na seção 2.
 
-- **AM1:** Um **revendedor** pode **comprar quatro ingressos em cada uma de várias contas que controla** por meio do **cadastro de contas e da regra de limite por conta (E1, E2)**, aproveitando **o pressuposto de que cada interessado usa uma única conta (P1)**, causando **a concentração de ingressos acima da cota** sobre **a distribuição justa do estoque**.
-- **AM2:** Um **revendedor** pode **distribuir as compras de suas contas por VPN ou redes diferentes** por meio da **correlação por IP (E3)**, aproveitando **o pressuposto de que o IP revela compras coordenadas (P2)**, causando **compras coordenadas não detectadas enquanto compradores legítimos em redes compartilhadas são retidos** sobre **a distribuição justa e o acesso dos compradores legítimos**.
-- **AM3:** Um **revendedor** pode **recrutar intermediários reais para comprar em seus próprios nomes e repassar os ingressos** por meio da **verificação de identidade (E5)**, aproveitando **o pressuposto de que identidade verificada impede a concentração (P3)**, causando **concentração com identidades válidas, difícil de distinguir de compras legítimas** sobre **a distribuição justa do estoque**.
-- **AM4:** Um **revendedor** pode **fazer compras de teste e comparar aceites, retenções e recusas** por meio das **respostas observáveis da compra (E4)**, aproveitando **o fato de que respostas detalhadas dão pistas dos critérios internos de detecção**, causando **a adaptação mais rápida e barata às defesas** sobre **a eficácia dos controles da plataforma**.
-- **AM5:** Um **revendedor** pode **repassar ingressos nominais por transferências permitidas ou comprar já em nome do destinatário final** por meio da **titularidade e transferência do ingresso (E6)**, aproveitando **o pressuposto de que o titular registrado é quem vai ao evento**, causando **a revenda de ingressos que passaram por todos os controles da compra** sobre **a distribuição justa e a confiança no ingresso nominal**.
+- **AM1:** Um **revendedor** pode **comprar quatro ingressos em cada uma de várias contas** por meio do **cadastro e da regra de limite por conta (E1, E2)**, aproveitando **o pressuposto de uma conta por interessado (P1)**, causando **concentração de ingressos acima da cota** sobre **a distribuição justa do estoque**.
+- **AM2:** Um **revendedor** pode **distribuir as compras por VPN ou redes diferentes** por meio da **correlação por IP (E3)**, aproveitando **o pressuposto de que o IP revela compras coordenadas (P2)**, causando **compras coordenadas não detectadas e retenção de legítimos em redes compartilhadas** sobre **a distribuição justa e o acesso dos compradores legítimos**.
+- **AM3:** Um **revendedor** pode **recrutar intermediários reais que compram em seus nomes e repassam os ingressos** por meio da **verificação de identidade (E5)**, aproveitando **o pressuposto de que identidade verificada impede a concentração (P3)**, causando **concentração com identidades válidas** sobre **a distribuição justa do estoque**.
+- **AM4:** Um **revendedor** pode **fazer compras de teste e comparar as respostas** por meio das **respostas da compra (E4)**, aproveitando **as pistas que respostas detalhadas dão sobre os critérios de detecção**, causando **adaptação mais rápida e barata às defesas** sobre **a eficácia dos controles**.
+- **AM5:** Um **revendedor** pode **repassar ingressos nominais por transferências permitidas ou comprar em nome do destinatário final** por meio da **titularidade e transferência do ingresso (E6)**, aproveitando **o pressuposto de que o titular é quem vai ao evento**, causando **a revenda de ingressos que passaram pelos controles** sobre **a distribuição justa e a confiança no ingresso nominal**.
 
 ### 4.4 Avaliação de riscos
 
-Escala de 1 a 3 para probabilidade e impacto; risco = probabilidade × impacto.
+Probabilidade e impacto em escala de 1 a 3; risco = probabilidade × impacto.
 
 | ID | Cenário de ameaça | Ponto de exploração | Pressuposto ou fraqueza | Ativo afetado | Probabilidade | Impacto | Risco |
 | --- | --- | --- | --- | --- | ---: | ---: | ---: |
@@ -235,29 +235,27 @@ Escala de 1 a 3 para probabilidade e impacto; risco = probabilidade × impacto.
 | **AM4** | Sondagem dos critérios pelas respostas | E4 | Respostas detalhadas dão pistas dos critérios | Eficácia dos controles | 3 | 2 | **6** |
 | **AM5** | Repasse de ingressos nominais | E6 | Titular registrado é quem vai ao evento | Distribuição justa; confiança no ingresso | 2 | 2 | **4** |
 
-Justificativa das notas:
-
-- **AM1** tem probabilidade alta porque, sob a regra inicial (D1), é a melhor resposta do revendedor (A2 na seção 2.4) e custa pouco. O impacto é alto porque cada conta extra retira quatro ingressos do estoque dos compradores legítimos.
-- **AM2** só faz sentido depois que a correlação por IP é adotada e exige gerenciar redes para muitas contas, por isso a probabilidade é média. O impacto continua alto: a concentração é a mesma de AM1 e a defesa ainda retém compradores legítimos.
-- **AM3** exige recrutar, pagar e coordenar pessoas, o que reduz a probabilidade. O impacto é alto porque cada intermediário é indistinguível de um comprador legítimo.
-- **AM4** tem probabilidade alta porque toda tentativa já gera uma resposta, sem custo adicional. O impacto é médio porque a sondagem não concentra ingressos por si só, mas acelera AM1 a AM3.
-- **AM5** só ocorre na rodada 4 e depende de transferências permitidas ou de uma conferência falha na entrada, por isso probabilidade e impacto são médios.
+- **AM1:** é a melhor resposta contra a regra inicial (A2 contra D1, seção 2.4) e custa pouco; cada conta extra tira quatro ingressos dos legítimos.
+- **AM2:** só surge depois da correlação por IP e exige gerenciar redes para muitas contas; a concentração é a mesma de AM1.
+- **AM3:** recrutar e coordenar pessoas custa caro, mas cada intermediário é indistinguível de um comprador legítimo.
+- **AM4:** toda tentativa já gera uma resposta, sem custo extra; não concentra ingressos sozinha, mas acelera AM1 a AM3.
+- **AM5:** só aparece na rodada 4 e depende de transferências permitidas ou de uma conferência falha na entrada.
 
 ### 4.5 Resposta à ameaça prioritária (AM1)
 
-**AM1** tem o maior risco (9) e é a origem das demais: AM2, AM3 e AM4 são formas de continuar a concentração por várias contas depois que a plataforma reage.
+**AM1** tem o maior risco (9) e origina as demais: AM2 a AM4 são formas de manter a concentração por várias contas depois que a plataforma reage.
 
-1. **Como o sistema poderia responder.** A cota de quatro ingressos passa a ser contada **por titular verificado**, somando todas as contas ligadas ao mesmo documento, e a verificação é pedida **apenas no checkout deste evento**, com o carrinho reservado enquanto ela ocorre. O IP deixa de ser motivo de recusa e passa a ser só um sinal para priorizar revisões. As respostas ficam **uniformes** ("compra em análise" ou "limite do titular atingido"), sem indicar qual sinal disparou a retenção. Como mudança de incentivo, a plataforma oferece **transferência oficial pelo valor de face**, para que quem não puder ir repasse o ingresso sem recorrer a revendedores e para reduzir a margem da revenda. Esta resposta combina D3 com parte de D4 do modelo estático. Para saber se a resposta funciona, o painel do administrador acompanha a quantidade de ingressos por titular, a taxa de compras retidas e a taxa de contestações aceitas; esta última mede quantos compradores legítimos foram barrados por engano.
-2. **Que informação essa resposta revelaria.** O revendedor aprende que a unidade da cota passou a ser a pessoa, que o documento é o identificador decisivo e em que momento a verificação acontece. Com respostas uniformes, ele perde a informação de qual sinal (IP, horário, quantidade) levou a uma retenção, mas ainda observa a taxa de aprovação das suas tentativas.
-3. **Como o adversário poderia se adaptar na rodada seguinte.** Conforme a cadeia de melhores respostas da seção 2.5, a adaptação esperada é **AM3**: recrutar intermediários reais, ou usar documentos de familiares e conhecidos, cada um comprando até quatro ingressos. O revendedor também pode testar se contas antigas, criadas antes da regra, escapam da verificação.
-4. **Quais efeitos colaterais poderiam atingir usuários legítimos.** Compradores legítimos passam a fornecer dados pessoais e a gastar mais tempo no checkout de um evento concorrido; quem não tem documento aceito ou enfrenta falha no serviço externo pode perder a compra. Grupos com mais de quatro pessoas precisam de outro titular. A plataforma passa a guardar dados sensíveis, o que exige coleta mínima e prazo de retenção definido.
-5. **Qual risco continuaria existindo após a resposta.** A concentração por intermediários reais (AM3) não é bloqueada, porque cada intermediário é um titular válido. A reavaliação abaixo mostra o deslocamento do risco: AM1 cai, mas AM3 passa a ser a ameaça prioritária, o que coincide com o equilíbrio (A4, D4) da seção 2.5.
+1. **Resposta do sistema.** A cota de quatro ingressos passa a ser contada **por titular verificado**, somando as contas do mesmo documento. A verificação é pedida só no checkout deste evento, com o carrinho reservado enquanto ocorre. O IP deixa de recusar compras e só prioriza revisões, e as respostas ficam **uniformes** ("compra em análise" ou "limite do titular atingido"). Como mudança de incentivo, a plataforma oferece **transferência oficial pelo valor de face**, o que reduz a margem da revenda. O painel acompanha os ingressos por titular, a taxa de compras retidas e a taxa de contestações aceitas, que mede quantos legítimos foram barrados por engano. A resposta combina D3 com parte de D4 do modelo estático.
+2. **Informação revelada.** O revendedor aprende que a cota passou a ser por pessoa, que o documento é o identificador decisivo e em que momento a verificação ocorre. Com respostas uniformes, não sabe mais qual sinal causou uma retenção, mas ainda vê sua taxa de aprovação.
+3. **Adaptação do adversário.** Pela cadeia de melhores respostas da seção 2.5, o revendedor passa para **AM3**: intermediários reais ou documentos de familiares, cada um com até quatro ingressos. Também pode testar se contas antigas escapam da verificação.
+4. **Efeitos colaterais.** Compradores legítimos fornecem dados pessoais e gastam mais tempo no checkout; quem não tem documento aceito ou enfrenta falha no serviço externo pode perder a compra; grupos com mais de quatro pessoas precisam de outro titular. A plataforma passa a guardar dados sensíveis, com coleta mínima e prazo de retenção definido.
+5. **Risco residual.** AM3 não é bloqueada, porque cada intermediário é um titular válido. O risco se desloca, como prevê o equilíbrio (A4, D4) da seção 2.5:
 
    | ID | Antes (P × I) | Depois (P × I) | Motivo |
    | --- | ---: | ---: | --- |
-   | **AM1** | 3 × 3 = 9 | 1 × 3 = **3** | Várias contas do mesmo titular somam na mesma cota. |
-   | **AM3** | 2 × 3 = 6 | 3 × 3 = **9** | Intermediários viram o caminho mais barato para concentrar. |
-   | **AM4** | 3 × 2 = 6 | 3 × 1 = **3** | Respostas uniformes dão menos pistas dos critérios. |
+   | **AM1** | 3 × 3 = 9 | 1 × 3 = **3** | Contas do mesmo titular somam na mesma cota. |
+   | **AM3** | 2 × 3 = 6 | 3 × 3 = **9** | Intermediários viram o caminho mais barato. |
+   | **AM4** | 3 × 2 = 6 | 3 × 1 = **3** | Respostas uniformes dão menos pistas. |
 
-   O sinal que dispararia a próxima adaptação do defensor é a concentração em titulares distintos com padrões em comum, como o mesmo meio de pagamento ou transferências oficiais para o mesmo destino. Esses sinais também seriam indícios, não provas, e reabririam o ciclo da seção 3.
-6. **O que o sistema precisa continuar preservando apesar das adaptações.** A **distribuição justa do estoque** continua sendo o ativo central, mas não pode ser buscada a qualquer custo. A plataforma precisa manter a regra pública e previsível (quatro por titular), um atrito proporcional ao risco do evento, um canal de contestação para compras retidas por engano, a coleta mínima de dados pessoais e a disponibilidade da venda durante o pico de demanda.
+   A próxima reação do defensor seria buscar padrões entre titulares distintos, como o mesmo meio de pagamento ou transferências para o mesmo destino. Esses sinais também seriam indícios, não provas, e reabririam o ciclo da seção 3.
+6. **O que preservar.** A distribuição justa do estoque, sem buscá-la a qualquer custo: regra pública e previsível (quatro por titular), atrito proporcional ao risco do evento, canal de contestação para compras retidas por engano, coleta mínima de dados e disponibilidade da venda no pico de demanda.
