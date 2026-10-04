@@ -14,9 +14,9 @@ Análise de uma plataforma hipotética de venda de ingressos para diferentes eve
 
 | Username do GitHub         | Nome Completo                         | Matrícula   |
 |----------------------------|---------------------------------------|-------------|
-| ```INARI18```              | Beatriz Roland Machado                | 0000000000  |
+| ```INARI18```              | Beatriz Roland Machado                | 2310101585  |
 | ```CristhianKapelinski```  | Cristhian Eduardo Kapelinski de Avila | 0000000000  |
-| ```guimsk```               | Guilherme Muller Schweitzer Klauberg  | 23101015  |
+| ```guimsk```               | Guilherme Muller Schweitzer Klauberg  | 2310101588  |
 | ```chicosbg```             | Luis Francisco Brum Gomes             | 2310100558  |
 | ```R-ZW```                 | Reinaldo Zimmer Wendt                 | 2310100642  |
 
