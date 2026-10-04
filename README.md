@@ -29,6 +29,7 @@ Análise de uma plataforma hipotética de venda de ingressos para diferentes eve
 ### 3. [🔀 Modelo estratégico dinâmico](#modelo-dinamico)
 ### 4. [⚠️ Ameaças e riscos](#ameacas-e-riscos)
 ### 5. [🏁 Conclusão](#conclusao)
+### 6. [📚 Referências](#referencias)
 
 ---
 
@@ -286,3 +287,9 @@ Probabilidade e impacto em escala de 1 a 3; risco = probabilidade × impacto.
 - **Como os participantes decidem?** Cada lado escolhe a melhor resposta à ação do outro. Na decisão central não há resultado estável (seção 2.6); com todas as estratégias, a cadeia de melhores respostas termina em (A4, D4) (seção 2.5).
 - **Como a interação evolui?** Cada recusa, retenção ou verificação revela um critério ao revendedor, que muda o meio sem mudar o objetivo: conta única, várias contas, redes distintas, intermediários (seção 3). Cada defesa nova acrescenta atrito para os legítimos.
 - **Depois que o sistema responder, o que o outro lado aprenderá e tentará fazer em seguida?** Com a cota por titular verificado (seção 4.5), o revendedor aprende que o documento é o identificador decisivo e passa a recrutar intermediários reais (AM3). A plataforma, então, procuraria padrões entre titulares distintos, e o ciclo recomeça.
+
+<a id="referencias"></a>
+
+## 📚 6. Referências
+
+As fontes usadas (aulas da disciplina, teoria dos jogos e documentação das ferramentas de diagrama) estão em [`fontes/referencias.md`](fontes/referencias.md), com a seção do relatório em que cada uma foi usada.
