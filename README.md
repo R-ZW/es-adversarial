@@ -242,3 +242,22 @@ Justificativa das notas:
 - **AM3** exige recrutar, pagar e coordenar pessoas, o que reduz a probabilidade. O impacto é alto porque cada intermediário é indistinguível de um comprador legítimo.
 - **AM4** tem probabilidade alta porque toda tentativa já gera uma resposta, sem custo adicional. O impacto é médio porque a sondagem não concentra ingressos por si só, mas acelera AM1 a AM3.
 - **AM5** só ocorre na rodada 4 e depende de transferências permitidas ou de uma conferência falha na entrada, por isso probabilidade e impacto são médios.
+
+### 4.5 Resposta à ameaça prioritária (AM1)
+
+**AM1** tem o maior risco (9) e é a origem das demais: AM2, AM3 e AM4 são formas de continuar a concentração por várias contas depois que a plataforma reage.
+
+1. **Como o sistema poderia responder.** A cota de quatro ingressos passa a ser contada **por titular verificado**, somando todas as contas ligadas ao mesmo documento, e a verificação é pedida **apenas no checkout deste evento**, com o carrinho reservado enquanto ela ocorre. O IP deixa de ser motivo de recusa e passa a ser só um sinal para priorizar revisões. As respostas ficam **uniformes** ("compra em análise" ou "limite do titular atingido"), sem indicar qual sinal disparou a retenção. Como mudança de incentivo, a plataforma oferece **transferência oficial pelo valor de face**, para que quem não puder ir repasse o ingresso sem recorrer a revendedores e para reduzir a margem da revenda. Esta resposta combina D3 com parte de D4 do modelo estático.
+2. **Que informação essa resposta revelaria.** O revendedor aprende que a unidade da cota passou a ser a pessoa, que o documento é o identificador decisivo e em que momento a verificação acontece. Com respostas uniformes, ele perde a informação de qual sinal (IP, horário, quantidade) levou a uma retenção, mas ainda observa a taxa de aprovação das suas tentativas.
+3. **Como o adversário poderia se adaptar na rodada seguinte.** Conforme a cadeia de melhores respostas da seção 2.5, a adaptação esperada é **AM3**: recrutar intermediários reais, ou usar documentos de familiares e conhecidos, cada um comprando até quatro ingressos. O revendedor também pode testar se contas antigas, criadas antes da regra, escapam da verificação.
+4. **Quais efeitos colaterais poderiam atingir usuários legítimos.** Compradores legítimos passam a fornecer dados pessoais e a gastar mais tempo no checkout de um evento concorrido; quem não tem documento aceito ou enfrenta falha no serviço externo pode perder a compra. Grupos com mais de quatro pessoas precisam de outro titular. A plataforma passa a guardar dados sensíveis, o que exige coleta mínima e prazo de retenção definido.
+5. **Qual risco continuaria existindo após a resposta.** A concentração por intermediários reais (AM3) não é bloqueada, porque cada intermediário é um titular válido. A reavaliação abaixo mostra o deslocamento do risco: AM1 cai, mas AM3 passa a ser a ameaça prioritária, o que coincide com o equilíbrio (A4, D4) da seção 2.5.
+
+   | ID | Antes (P × I) | Depois (P × I) | Motivo |
+   | --- | ---: | ---: | --- |
+   | **AM1** | 3 × 3 = 9 | 1 × 3 = **3** | Várias contas do mesmo titular somam na mesma cota. |
+   | **AM3** | 2 × 3 = 6 | 3 × 3 = **9** | Intermediários viram o caminho mais barato para concentrar. |
+   | **AM4** | 3 × 2 = 6 | 3 × 1 = **3** | Respostas uniformes dão menos pistas dos critérios. |
+
+   O sinal que dispararia a próxima adaptação do defensor é a concentração em titulares distintos com padrões em comum, como o mesmo meio de pagamento ou transferências oficiais para o mesmo destino. Esses sinais também seriam indícios, não provas, e reabririam o ciclo da seção 3.
+6. **O que o sistema precisa continuar preservando apesar das adaptações.** A **distribuição justa do estoque** continua sendo o ativo central, mas não pode ser buscada a qualquer custo. A plataforma precisa manter a regra pública e previsível (quatro por titular), um atrito proporcional ao risco do evento, um canal de contestação para compras retidas por engano, a coleta mínima de dados pessoais e a disponibilidade da venda durante o pico de demanda.
