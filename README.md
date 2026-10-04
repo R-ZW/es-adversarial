@@ -158,7 +158,7 @@ O comprador legítimo é modelado só pelo atrito e não escolhe estratégia.
 
 ### 3.1 Rodadas adversariais
 
-As rodadas partem do limite inicial de quatro ingressos por conta. Em cada uma, o revendedor mantém o objetivo de concentrar ingressos, mas altera o meio usado após observar a resposta da plataforma.
+As rodadas partem do limite inicial de quatro ingressos por conta. Em cada uma, o revendedor mantém o objetivo de concentrar ingressos, mas altera o meio usado após observar a resposta da plataforma. As compras confirmadas consomem parte do estoque e não são desfeitas automaticamente quando um controle é alterado; por isso, cada rodada também reduz as opções disponíveis para a seguinte. Os controles acumulados podem aumentar o atrito para compradores legítimos.
 
 | Rodada | Ação do participante | Resposta do sistema ou defensor | O que se torna observável? | Adaptação para a rodada seguinte |
 | :--- | :--- | :--- | :--- | :--- |
@@ -174,6 +174,14 @@ O fluxograma em raias acompanha as quatro rodadas da tabela. As respostas da pla
 ![Fluxograma em raias do ciclo adaptativo entre revendedor e plataforma](diagramas/ciclo-adaptativo.png)
 
 [Arquivo-fonte editável do diagrama em PlantUML](diagramas/src/ciclo-adaptativo.puml).
+
+### 3.3 Observação, adaptação e custos
+
+- **Quem observa quem?** O revendedor observa limites, retenções, verificações e resultados das compras. A plataforma observa contas, horários, quantidades, redes utilizadas e resultados das verificações; esses sinais não identificam com certeza quem controla cada conta.
+- **O que cada lado consegue mudar?** O revendedor pode mudar a quantidade e a coordenação das contas, as redes de acesso e o uso de intermediários. A plataforma pode ajustar limites, correlação de sinais, verificações e regras de transferência.
+- **O que dispara uma adaptação?** Uma recusa ou retenção revela um limite ao revendedor; a plataforma adapta os controles quando observa padrões de tentativas que sugerem concentração ou quando uma defesa anterior se mostra insuficiente.
+- **Quais são os custos?** Para o revendedor, são custos de manter contas, coordenar tentativas e recrutar intermediários, além do risco de perder compras. Para a plataforma, são custos operacionais e de tratamento de dados; para compradores legítimos, há tempo, verificações, recusas indevidas e restrições de transferência.
+- **Onde pode surgir uma corrida armamentista?** Quando cada nova defesa leva o revendedor a adotar outro meio de coordenação e essa mudança leva a plataforma a impor controles mais abrangentes. O ciclo pode elevar custos e falsos positivos sem eliminar completamente a concentração de ingressos.
 
 ## ⚠️ 4. Ameaças e riscos
 
