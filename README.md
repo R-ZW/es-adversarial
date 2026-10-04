@@ -192,4 +192,15 @@ O fluxograma em raias acompanha as quatro rodadas da tabela. As respostas da pla
 
 ## ⚠️ 4. Ameaças e riscos
 
-[...]
+### 4.1 Pontos de exploração
+
+Os pontos de exploração foram extraídos do fluxo de compra (seção 1.1), dos pressupostos P1 a P3 (seção 1.3) e das rodadas da seção 3. Cada um é uma interface, regra ou componente da plataforma que o revendedor usa para atingir o mesmo objetivo: concentrar ingressos acima da cota.
+
+| ID | Ponto de exploração | Componente ou fluxo | Fraqueza explorada | Rodada em que aparece |
+| --- | --- | --- | --- | --- |
+| **E1** | Criação de contas | Cadastro de contas | Criar uma conta nova não custa quase nada ao revendedor (P1). | 1 e 2 |
+| **E2** | Regra de quatro ingressos por conta | Compra e checkout | A cota é contada por conta, não por pessoa (P1). | 1 e 2 |
+| **E3** | Correlação de contas pelo IP | Registro de tentativas | O IP é um indício fraco: muda com VPN e é compartilhado por compradores legítimos (P2). | 2 e 3 |
+| **E4** | Respostas observáveis da compra | Aceite, retenção, recusa e pedido de verificação | Cada resposta dá pistas de qual sinal o sistema usa e de qual variação passa, embora o revendedor não conheça diretamente os critérios internos (seção 1.2). | Todas |
+| **E5** | Verificação de identidade | Integração eventual com o serviço externo | Uma identidade válida não prova que o comprador age por conta própria (P3). | 3 e 4 |
+| **E6** | Titularidade e transferência do ingresso | Emissão de ingresso nominal e conferência na entrada | As transferências permitidas e a conferência na entrada podem ser usadas para repassar ingressos. | 4 |
