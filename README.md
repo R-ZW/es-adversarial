@@ -5,7 +5,7 @@ Análise de uma plataforma hipotética de venda de ingressos para diferentes eve
 ## 🆔 Identificação 
 
 > **Nome do sistema:** ``ScalperObliterator3000`` - Aplicativo de compra de ingressos <br>
-> **Repositório:** [https://github.com/R-ZW/tc-seminario](https://github.com/R-ZW/tc-seminario)<br>
+> **Repositório:** [https://github.com/R-ZW/es-adversarial](https://github.com/R-ZW/es-adversarial)<br>
 > **Vídeo de apresentação T1:** [link](#) <br>
 > **Vídeo de apresentação T2:** [link](#) <br>
 > **Justificativa:** A venda de ingressos em eventos de alta demanda expõe um conflito concreto entre distribuição justa e aquisição em escala para revenda. O limite por conta pode ser contornado com múltiplas contas; verificações adicionais provocam novas adaptações do revendedor e podem dificultar compras legítimas. O recorte permite analisar esse ciclo e é viável para uma implementação simulada no Trabalho 2. 
@@ -15,7 +15,7 @@ Análise de uma plataforma hipotética de venda de ingressos para diferentes eve
 | Username do GitHub         | Nome Completo                         | Matrícula   |
 |----------------------------|---------------------------------------|-------------|
 | ```INARI18```              | Beatriz Roland Machado                | 2310101585  |
-| ```CristhianKapelinski```  | Cristhian Eduardo Kapelinski de Avila | 0000000000  |
+| ```CristhianKapelinski```  | Cristhian Eduardo Kapelinski de Avila | 2310100609  |
 | ```guimsk```               | Guilherme Muller Schweitzer Klauberg  | 2310101588  |
 | ```chicosbg```             | Luis Francisco Brum Gomes             | 2310100558  |
 | ```R-ZW```                 | Reinaldo Zimmer Wendt                 | 2310100642  |
@@ -24,12 +24,17 @@ Análise de uma plataforma hipotética de venda de ingressos para diferentes eve
 
 ## Sumário
 
-### 1. [📋 Descrição do sistema adversarial](#)
-### 2. [♟️ Modelo estratégico estático](#)
-### 3. [🔀 Modelo estratégico dinâmico](#)
-### 4. [⚠️ Ameaças e riscos](#)
+### 1. [📋 Descrição do sistema adversarial](#descricao-do-sistema)
+### 2. [♟️ Modelo estratégico estático](#modelo-estatico)
+### 3. [🔀 Modelo estratégico dinâmico](#modelo-dinamico)
+### 4. [⚠️ Ameaças e riscos](#ameacas-e-riscos)
+### 5. [🏁 Conclusão](#conclusao)
+### 6. [📚 Referências](#referencias)
+### 7. [🤖 Uso de IA generativa](#uso-de-ia)
 
 ---
+
+<a id="descricao-do-sistema"></a>
 
 ## 📋 1. Descrição do sistema adversarial
 
@@ -77,13 +82,15 @@ O diagrama de contexto segue o [modelo C4](https://c4model.com/diagrams/system-c
 
 ![Diagrama C4 de contexto do ScalperObliterator3000](diagramas/contexto.png)
 
-[Arquivo-fonte editável do diagrama em Structurizr DSL](diagramas/contexto.dsl).
+[Arquivo-fonte editável do diagrama em Structurizr DSL](diagramas/src/contexto.dsl).
 
 ### 1.5 Por que a interação é adversarial
 
 A interação é adversarial porque o revendedor tenta **deliberadamente contornar o limite de quatro ingressos por conta** para concentrar ingressos e revendê-los, enquanto a plataforma busca distribuí-los de forma justa sem prejudicar compradores legítimos. Ao observar compras aceitas, recusas ou pedidos de verificação, o revendedor pode mudar de conta, rede ou comprador intermediário; a plataforma, por sua vez, observa as tentativas e ajusta seus controles. Portanto, o conflito não decorre de um erro isolado: os participantes têm objetivos diferentes e adaptam suas decisões às respostas um do outro.
 
-### ♟️ 2. Modelo estratégico estático
+<a id="modelo-estatico"></a>
+
+## ♟️ 2. Modelo estratégico estático
 
 ### 2.1 Jogadores, informação e recorte
 
@@ -147,12 +154,30 @@ A cadeia A2 → D2 → A3 → D3 → A4 → D4 ilustra as adaptações estratég
 
 **Sensibilidade.** O equilíbrio depende do payoff do revendedor em (A4, D4). Se ele cair de 2 para 0, por exemplo devido ao custo dos intermediários ou à dificuldade de repasse, A1 passa a ser preferível a A4 contra D4 e deixa de existir equilíbrio em estratégias puras. Seria então necessário analisar estratégias mistas ou rever o conjunto de estratégias; a ausência de equilíbrio puro, por si só, não implica que os jogadores tenham de alternar de forma determinística.
 
-### 2.6 Limitações
+### 2.6 Decisão central em formato 2 × 2
+
+A decisão central é o recorte **A1/A2 × D1/D3** da matriz da seção 2.4: o revendedor decide se **contorna a cota com várias contas**, e a plataforma decide se **exige identidade verificada**. Os payoffs foram reescritos como ordem de preferência de cada jogador (0 = pior, 2 = melhor), sem mudar a ordem que eles têm na matriz completa. Cada célula traz **(revendedor, defensor)**, e o negrito marca a melhor resposta, como na seção 2.4.
+
+| Revendedor \ Defensor | **D1** Só limite por conta | **D3** Exige identidade verificada |
+| :-- | :--: | :--: |
+| **A1** Conta única | (1, **2**) | (**1**, 1) |
+| **A2** Várias contas | (**2**, 0) | (0, **1**) |
+
+1. **O que representa cada ação.** A1: comprar só os quatro ingressos de uma conta. A2: controlar várias contas e comprar quatro em cada uma. D1: aplicar só o limite por conta. D3: pedir identidade verificada antes da compra, para todos os compradores do evento.
+2. **Por que cada payoff.** Para o revendedor, A2 contra D1 é o melhor resultado (2), porque acumula ingressos sem custo extra; A1 rende 1 nas duas colunas, porque são só quatro ingressos, com ou sem verificação; A2 contra D3 é o pior (0), porque ele paga pelas contas e a verificação barra as compras extras. Para o defensor, A1 contra D1 é o melhor (2): ninguém excede a cota e ninguém sofre atrito; D3 rende 1 nas duas linhas, porque contém as contas extras mas cobra tempo e dados de todos; A2 contra D1 é o pior (0), porque o revendedor tira ingressos dos legítimos sem reação.
+3. **Melhores respostas.** Contra D1, o revendedor prefere A2 (2 > 1); contra D3, prefere A1 (1 > 0). Contra A1, o defensor prefere D1 (2 > 1); contra A2, prefere D3 (1 > 0).
+4. **Estratégia dominante.** Nenhum dos dois tem: a melhor ação de cada um muda conforme a escolha do outro.
+5. **Resultado em que ninguém melhora mudando sozinho.** Não existe em estratégias puras: em toda célula algum jogador ganha ao trocar de ação (com payoffs apenas ordinais, não calculamos equilíbrio em estratégias mistas). Partindo de (A1, D1), o revendedor passa para A2; o defensor responde com D3; o revendedor volta para A1; e, sem compras coordenadas, a verificação só cobraria atrito, então D1 volta a ser melhor. Esse giro é o que a seção 3 acompanha rodada a rodada; com as demais estratégias da matriz completa, a cadeia segue até (A4, D4), como mostra a seção 2.5.
+6. **Se o resultado é bom para o sistema e para os legítimos.** O melhor resultado para o sistema e para os compradores legítimos é (A1, D1): cota respeitada e compra sem atrito. Ele não se sustenta, porque o revendedor ganha ao desviar para A2. A resposta que contém esse desvio (D3) recai sobre todos: os legítimos passam a verificar a identidade mesmo sem ter feito nada errado.
+
+### 2.7 Limitações
 
 Os valores são ordinais e ilustrativos. As conclusões qualitativas (cadeia de melhores respostas, equilíbrio em A4/D4, custo para o legítimo) dependem da ordem entre os payoffs, e não dos números exatos. No Trabalho 2, a simulação pode calibrá-los.
 O jogo é de uma rodada: não captura aprendizado, reputação nem a descoberta gradual dos critérios de detecção, tratados na seção 3.
 Não há estratégias mistas nem crença do defensor sobre a proporção de revendedores, e os erros de classificação (P2) entram apenas indiretamente, via atrito.
 O comprador legítimo é modelado só pelo atrito e não escolhe estratégia.
+
+<a id="modelo-dinamico"></a>
 
 ## 🔀 3. Modelo estratégico dinâmico
 
@@ -182,6 +207,8 @@ O fluxograma em raias acompanha as quatro rodadas da tabela. As respostas da pla
 - **O que dispara uma adaptação?** Uma recusa ou retenção revela um limite ao revendedor; a plataforma adapta os controles quando observa padrões de tentativas que sugerem concentração ou quando uma defesa anterior se mostra insuficiente.
 - **Quais são os custos?** Para o revendedor, são custos de manter contas, coordenar tentativas e recrutar intermediários, além do risco de perder compras. Para a plataforma, são custos operacionais e de tratamento de dados; para compradores legítimos, há tempo, verificações, recusas indevidas e restrições de transferência.
 - **Onde pode surgir uma corrida armamentista?** Quando cada nova defesa leva o revendedor a adotar outro meio de coordenação e essa mudança leva a plataforma a impor controles mais abrangentes. O ciclo pode elevar custos e falsos positivos sem eliminar completamente a concentração de ingressos.
+
+<a id="ameacas-e-riscos"></a>
 
 ## ⚠️ 4. Ameaças e riscos
 
@@ -252,3 +279,26 @@ Probabilidade e impacto em escala de 1 a 3; risco = probabilidade × impacto.
 
    A próxima reação do defensor seria buscar padrões entre titulares distintos, como o mesmo meio de pagamento ou transferências para o mesmo destino. Esses sinais também seriam indícios, não provas, e reabririam o ciclo da seção 3.
 6. **O que preservar.** A distribuição justa do estoque, sem buscá-la a qualquer custo: regra pública e previsível (quatro por titular), atrito proporcional ao risco do evento, canal de contestação para compras retidas por engano, coleta mínima de dados e disponibilidade da venda no pico de demanda.
+
+<a id="conclusao"></a>
+
+## 🏁 5. Conclusão
+
+- **O que torna o sistema adversarial?** O revendedor quer concentrar ingressos acima da cota, e a plataforma quer distribuí-los entre compradores legítimos. O limite por conta é a regra que um lado explora e o outro defende (seções 1.3 e 1.5).
+- **Como os participantes decidem?** Cada lado escolhe a melhor resposta à ação do outro. Na decisão central não há resultado estável (seção 2.6); com todas as estratégias, a cadeia de melhores respostas termina em (A4, D4) (seção 2.5).
+- **Como a interação evolui?** Cada recusa, retenção ou verificação revela um critério ao revendedor, que muda o meio sem mudar o objetivo: conta única, várias contas, redes distintas, intermediários (seção 3). Cada defesa nova acrescenta atrito para os legítimos.
+- **Depois que o sistema responder, o que o outro lado aprenderá e tentará fazer em seguida?** Com a cota por titular verificado (seção 4.5), o revendedor aprende que o documento é o identificador decisivo e passa a recrutar intermediários reais (AM3). A plataforma, então, procuraria padrões entre titulares distintos, e o ciclo recomeça.
+
+<a id="referencias"></a>
+
+## 📚 6. Referências
+
+As fontes usadas (aulas da disciplina, teoria dos jogos e documentação das ferramentas de diagrama) estão em [`fontes/referencias.md`](fontes/referencias.md), com a seção do relatório em que cada uma foi usada.
+
+<a id="uso-de-ia"></a>
+
+## 🤖 7. Uso de IA generativa
+
+- **Ferramenta:** Claude Code (Anthropic).
+- **Tarefas:** conferir o relatório contra o enunciado, redigir e revisar trechos do texto, montar as referências e corrigir links.
+- **Verificação:** cada item foi conferido com o checklist do enunciado; os payoffs da seção 2.6 foram conferidos contra a matriz da seção 2.4; os links das referências foram abertos um a um; e o texto gerado foi lido e ajustado antes de entrar no relatório.
