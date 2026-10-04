@@ -28,6 +28,7 @@ Análise de uma plataforma hipotética de venda de ingressos para diferentes eve
 ### 2. [♟️ Modelo estratégico estático](#modelo-estatico)
 ### 3. [🔀 Modelo estratégico dinâmico](#modelo-dinamico)
 ### 4. [⚠️ Ameaças e riscos](#ameacas-e-riscos)
+### 5. [🏁 Conclusão](#conclusao)
 
 ---
 
@@ -276,3 +277,12 @@ Probabilidade e impacto em escala de 1 a 3; risco = probabilidade × impacto.
 
    A próxima reação do defensor seria buscar padrões entre titulares distintos, como o mesmo meio de pagamento ou transferências para o mesmo destino. Esses sinais também seriam indícios, não provas, e reabririam o ciclo da seção 3.
 6. **O que preservar.** A distribuição justa do estoque, sem buscá-la a qualquer custo: regra pública e previsível (quatro por titular), atrito proporcional ao risco do evento, canal de contestação para compras retidas por engano, coleta mínima de dados e disponibilidade da venda no pico de demanda.
+
+<a id="conclusao"></a>
+
+## 🏁 5. Conclusão
+
+- **O que torna o sistema adversarial?** O revendedor quer concentrar ingressos acima da cota, e a plataforma quer distribuí-los entre compradores legítimos. O limite por conta é a regra que um lado explora e o outro defende (seções 1.3 e 1.5).
+- **Como os participantes decidem?** Cada lado escolhe a melhor resposta à ação do outro. Na decisão central não há resultado estável (seção 2.6); com todas as estratégias, a cadeia de melhores respostas termina em (A4, D4) (seção 2.5).
+- **Como a interação evolui?** Cada recusa, retenção ou verificação revela um critério ao revendedor, que muda o meio sem mudar o objetivo: conta única, várias contas, redes distintas, intermediários (seção 3). Cada defesa nova acrescenta atrito para os legítimos.
+- **Depois que o sistema responder, o que o outro lado aprenderá e tentará fazer em seguida?** Com a cota por titular verificado (seção 4.5), o revendedor aprende que o documento é o identificador decisivo e passa a recrutar intermediários reais (AM3). A plataforma, então, procuraria padrões entre titulares distintos, e o ciclo recomeça.
