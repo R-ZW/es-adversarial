@@ -93,50 +93,34 @@ O comprador legítimo não é jogador estratégico, porque segue as regras e nã
 
 ### 2.2 Estratégias
 
-As estratégias correspondem aos meios das quatro rodadas da seção 3, tratados aqui como alternativas simultâneas.
+As estratégias são alternativas simultâneas para uma única janela de venda; portanto, não representam literalmente cada etapa temporal da seção 3. A1 e D1 descrevem as opções de referência (compra dentro da cota e controle básico). A tentativa inicial de exceder a cota, na rodada 1, serve para revelar a regra e não é uma estratégia adicional da matriz. As adaptações das rodadas seguintes são representadas pelas alternativas A2–A4 e D2–D4.
 
-### Revendedor (ID: Descrição)
-
-A1:	Conta única	Compra até o limite de quatro ingressos em uma só conta, sem tentar contornar a regra.
-
-A2:	Várias contas, mesma rede	Controla várias contas e compra quatro ingressos em cada uma, a partir do mesmo IP.
-
-A3:	Várias contas, redes distintas	Igual a A2, mas distribui as tentativas por VPN ou redes diferentes.
-
-A4:	Intermediários reais	Recruta pessoas com identidades válidas para comprar em seus nomes e repassar os ingressos.
-
-### Defensor (ID: Descrição)
-
-D1: Limite por conta	Aplica apenas o limite de quatro ingressos por conta.
-
-D2: Limite + correlação por IP	Correlaciona contas pelo IP e retém compras suspeitas para revisão.
-
-D3: Identidade verificada	Exige identidade verificada para comprar ingressos do evento.
-
-D4: Ingressos nominais	Além da identidade, vincula o ingresso ao titular, restringe transferências e prevê conferência na entrada.
+| Jogador | ID | Estratégia | Descrição |
+| --- | --- | --- | --- |
+| Revendedor | A1 | Conta única | Compra até quatro ingressos em uma conta, sem contornar a regra. |
+| Revendedor | A2 | Várias contas, mesma rede | Controla várias contas e compra até quatro ingressos em cada uma, a partir da mesma rede. |
+| Revendedor | A3 | Várias contas, redes distintas | Como A2, mas distribui as tentativas por redes distintas. |
+| Revendedor | A4 | Intermediários reais | Recruta pessoas com identidades válidas para comprar em seus nomes e repassar os ingressos. |
+| Defensor | D1 | Limite por conta | Aplica apenas o limite de quatro ingressos por conta. |
+| Defensor | D2 | Limite e correlação por IP | Correlaciona contas pelo IP e retém compras suspeitas para revisão. |
+| Defensor | D3 | Identidade verificada | Exige identidade verificada para comprar ingressos do evento. |
+| Defensor | D4 | Ingressos nominais | Além da identidade, vincula o ingresso ao titular, restringe transferências e prevê conferência na entrada. |
 
 ### 2.3 Utilidades
 
-As utilidades usam uma escala ordinal de 0 a 10, que só compara resultados e não mede valores monetários.
+Os payoffs são ordinais, de 0 a 10: servem para comparar preferências, não representam dinheiro nem probabilidades. Em cada par, o primeiro valor é do revendedor e o segundo é do defensor. O payoff do revendedor resume o benefício esperado da revenda menos os custos e perdas; o do defensor resume a distribuição do estoque a compradores legítimos menos o atrito e o custo dos controles.
 
-Revendedor: receita esperada da revenda, menos o custo de operar o esquema (contas, VPN, recrutamento de intermediários) e menos as perdas por retenção ou recusa.
-Defensor: parcela do estoque que chega a compradores legítimos, menos o atrito imposto a eles e o custo operacional dos controles.
+### Premissas que sustentam os valores
 
-###  Premissas que sustentam os valores:
-
-A1: rende pouco ao revendedor (só quatro ingressos), mas não custa nada nem gera atrito.
-
-A2: é lucrativa contra D1 e barata, mas é neutralizada por D2, D3 e D4.
-
-A3: custa mais que A2 (VPN, gestão de redes). Escapa de D2, mas não de D3 e D4, que não dependem do IP.
-
-A4: tem custo fixo de recrutamento e repasse. Atravessa D1, D2 e D3 porque as identidades são válidas, e perde valor sob D4 porque a revenda fica difícil.
-
-D2: cria atrito moderado (redes compartilhadas podem ser retidas). D3 e D4 criam atrito crescente (tempo, dados, restrição de transferência e conferência na entrada), e D4 é a defesa mais custosa para quem compra legitimamente.
+- **A1:** rende pouco ao revendedor (no máximo quatro ingressos), mas não custa nada nem gera atrito adicional.
+- **A2:** é lucrativa contra D1 e barata, mas é contida por D2, D3 e D4.
+- **A3:** custa mais que A2 (gestão de redes distintas), escapa da correlação por IP, mas não das defesas baseadas em identidade ou titularidade.
+- **A4:** tem custo de recrutamento e repasse. Pode contornar D1, D2 e D3 por meio de pessoas com identidades válidas, mas perde valor sob D4, que dificulta a transferência.
+- **D2:** cria atrito moderado, pois compras legítimas em redes compartilhadas também podem ser retidas. D3 e D4 elevam o atrito com verificações, restrições de transferência e conferência na entrada; D4 é a defesa mais custosa para compradores legítimos.
 
 ### 2.4 Matriz de payoffs
 
-Cada célula traz **(revendedor, defensor)**. Os valores em **negrito** marcam a melhor resposta do jogador naquela linha ou coluna.
+Cada célula traz **(revendedor, defensor)**. O valor do revendedor em negrito indica sua melhor resposta na coluna; o valor do defensor em negrito indica sua melhor resposta na linha.
 
 | Revendedor \ Defensor | **D1** Limite por conta | **D2** + correlação por IP | **D3** + identidade | **D4** + ingressos nominais |
 | :-- | :--: | :--: | :--: | :--: |
@@ -145,22 +129,23 @@ Cada célula traz **(revendedor, defensor)**. Os valores em **negrito** marcam a
 | **A3** Várias contas, redes distintas | (7, 2) | (**6**, 3) | (1, **5**) | (0, 4) |
 | **A4** Intermediários reais | (5, 3) | (5, 2) | (**5**, 2) | (**2**, **4**) |
 
+**Justificativa dos resultados.** A1 rende 1 ao revendedor em qualquer coluna por limitar a compra à cota. A2 rende 8 sob D1, mas cai para 1 ou 0 quando as contas são retidas ou a identidade é exigida. A3 rende menos que A2 contra D1 (7) por custar mais, mantém retorno 6 contra D2 porque redes distintas reduzem a eficácia da correlação, e cai para 1 ou 0 sob D3 e D4. A4 rende 5 contra D1–D3 porque os intermediários têm identidades válidas, mas o custo de recrutamento reduz o retorno; sob D4, o retorno cai para 2 devido à dificuldade de repasse.
+
+Os payoffs do defensor refletem tanto a parcela de ingressos que permanece acessível a compradores legítimos quanto o atrito dos controles. Por isso, D1 recebe 8 contra A1, mas apenas 2–3 contra estratégias que concentram ingressos; D2 recebe 7 contra A1–A2 e menos contra estratégias que escapam à correlação ou usam intermediários; D3 recebe 5 contra A1–A3 e 2 contra A4; D4 recebe 4 em todas as linhas, representando a contenção adicional da revenda compensada pelo maior custo e atrito para compradores legítimos. Os números são ordinais e ilustrativos, não medições empíricas.
+
 ### 2.5 Análise
 
-Melhores respostas. Cada defesa tem uma melhor resposta do revendedor, e vice-versa:
+**Melhores respostas.** Para cada defesa, as melhores respostas do revendedor são: A2 contra D1, A3 contra D2 e A4 contra D3 ou D4. Para cada estratégia do revendedor, as melhores respostas do defensor são: D1 contra A1, D2 contra A2, D3 contra A3 e D4 contra A4.
 
-Contra D1, o revendedor responde com A2; contra D2, com A3; contra D3 e D4, com A4.
-Contra A1, o defensor responde com D1; contra A2, com D2; contra A3, com D3; contra A4, com D4.
+A cadeia A2 → D2 → A3 → D3 → A4 → D4 ilustra as adaptações estratégicas das rodadas 2 a 4. A rodada 1 é anterior a essa cadeia: nela, a tentativa de exceder a cota revela a regra por conta e motiva o uso de várias contas.
 
-A sequência A2 → D2 → A3 → D3 → A4 → D4 reproduz as quatro rodadas da seção 3, ou seja, o ciclo adaptativo aparece aqui como a cadeia de melhores respostas.
+**Equilíbrio de Nash em estratégias puras.** O único é (A4, D4), com payoffs (2, 4). É a única célula em que ambos estão em melhor resposta, e nenhum tem incentivo a desviar sozinho. Isso coincide com o risco residual da rodada 4: mesmo sob a defesa mais forte, o revendedor ainda prefere recrutar intermediários a desistir.
 
-Equilíbrio de Nash em estratégias puras. O único é (A4, D4), com payoffs (2, 4). É a única célula em que ambos estão em melhor resposta, e nenhum tem incentivo a desviar sozinho. Isso coincide com o risco residual da rodada 4: mesmo sob a defesa mais forte, o revendedor ainda prefere recrutar intermediários a desistir.
+**Dominância.** A4 domina estritamente A1: seus payoffs contra D1–D4 (5, 5, 5, 2) são maiores que os de A1 (1, 1, 1, 1). Isso não significa que A4 seja estratégia dominante, pois A2 é melhor contra D1 e A3 é melhor contra D2. O revendedor, portanto, não tem uma estratégia dominante entre as quatro opções. O defensor também não tem estratégia dominante: sua melhor resposta depende da escolha do revendedor.
 
-Dominância. A4 domina estritamente A1 (5, 5, 5, 2 contra 1, 1, 1, 1). Neste modelo, "cumprir a regra" nunca é a melhor escolha de um revendedor. As demais estratégias do revendedor não se dominam entre si, porque cada uma é a melhor resposta a alguma defesa.
+**Custo do equilíbrio para o defensor.** No equilíbrio, o defensor recebe 4, contra 8 em (A1, D1). A defesa mais robusta é a que mais pesa sobre os compradores legítimos, que absorvem o atrito da verificação, das restrições de transferência e da espera na entrada. O defensor não consegue eliminar a concentração; ele só a torna menos lucrativa, ao custo de dificultar a compra honesta.
 
-Custo do equilíbrio para o defensor. No equilíbrio, o defensor recebe 4, contra 8 em (A1, D1). A defesa mais robusta é a que mais pesa sobre os compradores legítimos, que absorvem o atrito da verificação, das restrições de transferência e da espera na entrada. O defensor não consegue eliminar a concentração; ele só a torna menos lucrativa, ao custo de dificultar a compra honesta.
-
-Sensibilidade. O equilíbrio depende do payoff do revendedor em (A4, D4). Se ele cair abaixo de 1, por exemplo com fiscalização forte na entrada ou intermediários caros, A1 passa a ser preferível a A4 e o equilíbrio em estratégias puras deixa de existir. Nesse caso, os jogadores teriam de alternar entre estratégias, o que dá sentido ao modelo dinâmico.
+**Sensibilidade.** O equilíbrio depende do payoff do revendedor em (A4, D4). Se ele cair de 2 para 0, por exemplo devido ao custo dos intermediários ou à dificuldade de repasse, A1 passa a ser preferível a A4 contra D4 e deixa de existir equilíbrio em estratégias puras. Seria então necessário analisar estratégias mistas ou rever o conjunto de estratégias; a ausência de equilíbrio puro, por si só, não implica que os jogadores tenham de alternar de forma determinística.
 
 ### 2.6 Limitações
 
