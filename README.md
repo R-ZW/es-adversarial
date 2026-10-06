@@ -6,7 +6,7 @@ Análise de uma plataforma hipotética de venda de ingressos para diferentes eve
 
 > **Nome do sistema:** ``ScalperObliterator3000`` - Aplicativo de compra de ingressos <br>
 > **Repositório:** [https://github.com/R-ZW/es-adversarial](https://github.com/R-ZW/es-adversarial)<br>
-> **Vídeo de apresentação T1:** [link](#) <br>
+> **Vídeo de apresentação T1:** [https://youtu.be/DK9-Le6jHjo](https://youtu.be/DK9-Le6jHjo) <br>
 > **Vídeo de apresentação T2:** [link](#) <br>
 > **Justificativa:** A venda de ingressos em eventos de alta demanda expõe um conflito concreto entre distribuição justa e aquisição em escala para revenda. O limite por conta pode ser contornado com múltiplas contas; verificações adicionais provocam novas adaptações do revendedor e podem dificultar compras legítimas. O recorte permite analisar esse ciclo e é viável para uma implementação simulada no Trabalho 2. 
 
