@@ -7,7 +7,7 @@ Análise de uma plataforma hipotética de venda de ingressos para diferentes eve
 > **Nome do sistema:** ``ScalperObliterator3000`` - Aplicativo de compra de ingressos <br>
 > **Repositório:** [https://github.com/R-ZW/es-adversarial](https://github.com/R-ZW/es-adversarial)<br>
 > **Vídeo de apresentação T1:** [https://youtu.be/DK9-Le6jHjo](https://youtu.be/DK9-Le6jHjo) <br>
-> **Vídeo de apresentação T2:** [link](#) <br>
+> **Vídeo de apresentação T2:** a preencher no Trabalho 2. <br>
 > **Justificativa:** A venda de ingressos em eventos de alta demanda expõe um conflito concreto entre distribuição justa e aquisição em escala para revenda. O limite por conta pode ser contornado com múltiplas contas; verificações adicionais provocam novas adaptações do revendedor e podem dificultar compras legítimas. O recorte permite analisar esse ciclo e é viável para uma implementação simulada no Trabalho 2. 
 
 ### 👥 Integrantes:
@@ -64,13 +64,19 @@ Consideramos três papéis na interação. Para a análise estratégica, **a pla
 
 A propriedade a preservar é a **distribuição justa do estoque de ingressos**, sem impor obstáculos desproporcionais aos compradores legítimos. A **regra inicial** limita a quatro o total de ingressos comprados por uma mesma conta para o evento analisado, somando compras anteriores dessa conta. Ela não identifica, por si só, quem controla contas diferentes ou quem receberá os ingressos.
 
+Também devem ser preservados o **acesso dos compradores legítimos**, a **confiança na titularidade dos ingressos**, a **eficácia dos controles**, a **privacidade dos dados pessoais** e a **disponibilidade da venda**. Essas propriedades orientam a análise dos efeitos colaterais e das respostas às ameaças.
+
 Para reconhecer compras possivelmente relacionadas, a plataforma pode observar **conta utilizada, horário das tentativas, quantidade solicitada e endereço IP**. Nas rodadas seguintes, o administrador pode usar esses sinais para solicitar verificações adicionais, inclusive de identidade. Esses dados são **indícios**, não provas de que duas compras pertencem à mesma pessoa; o limite por conta é o único controle obrigatório no cenário inicial.
+
+P1 sustenta a regra inicial; P2, P3 e P5 sustentam os controles acrescentados nas rodadas seguintes. P4 se aplica às respostas da plataforma em todas as rodadas.
 
 | ID | Pressuposto | Como pode falhar | Consequência para o sistema |
 | --- | --- | --- | --- |
 | **P1** | Cada interessado usa uma única conta para comprar ingressos do evento. | Um revendedor cria ou controla várias contas e compra até quatro ingressos em cada uma. | O limite é respeitado em cada conta, mas um mesmo interessado acumula mais de quatro ingressos. |
 | **P2** | O endereço IP ajuda a reconhecer compras coordenadas sem confundir compradores diferentes. | O revendedor muda de rede ou usa VPN; compradores legítimos compartilham uma rede doméstica ou pública. | Compras relacionadas podem passar despercebidas, enquanto compras legítimas podem ser sinalizadas. |
 | **P3** | Verificar a identidade de cada comprador impede que uma pessoa concentre os ingressos. | O revendedor recruta pessoas reais para comprar até quatro ingressos cada uma e repassá-los depois. | As identidades são distintas e válidas, mas os ingressos continuam concentrados pelo mesmo interessado. |
+| **P4** | As respostas informam o resultado da compra sem expor os critérios internos de detecção. | Mensagens diferentes permitem comparar tentativas e inferir quais sinais provocaram retenções ou recusas. | O revendedor aprende como contornar os controles com menos tentativas. |
+| **P5** | A titularidade nominal e as restrições de transferência impedem o repasse para revenda. | O revendedor usa transferências permitidas ou coordena a compra já em nome do destinatário final. | Ingressos válidos ainda podem ser revendidos, reduzindo a confiança no controle nominal. |
 
 > - **Regra inicial:** até quatro ingressos por conta no evento analisado.
 > - **Sinais possíveis:** conta, horário, quantidade, IP e, se exigida, identidade verificada.
@@ -94,13 +100,13 @@ A interação é adversarial porque o revendedor tenta **deliberadamente contorn
 
 ### 2.1 Jogadores, informação e recorte
 
-O modelo estático fixa uma única janela de venda do evento de alta demanda e analisa uma decisão simultânea entre dois jogadores: o revendedor e o defensor (plataforma e administrador, conforme a seção 1.2). Cada um escolhe sua estratégia sem observar a escolha do outro. É um jogo de informação imperfeita: a plataforma não sabe com certeza quem controla cada conta (P1 a P3), e o revendedor não conhece os critérios internos de detecção.
+O modelo estático fixa uma única janela de venda do evento de alta demanda e analisa uma decisão simultânea entre dois jogadores: o revendedor e o defensor (plataforma e administrador, conforme a seção 1.2). Cada um escolhe sua estratégia sem observar a escolha do outro. Há também incerteza sobre a interação: a plataforma não sabe com certeza quem controla cada conta (P1 a P3), e o revendedor não conhece os critérios internos de detecção.
 
 O comprador legítimo não é jogador estratégico, porque segue as regras e não adapta seu comportamento ao conflito. Seus custos entram na utilidade do defensor como atrito: demora, recusas indevidas e exposição de dados.
 
 ### 2.2 Estratégias
 
-As estratégias são alternativas simultâneas para uma única janela de venda; portanto, não representam literalmente cada etapa temporal da seção 3. A1 e D1 descrevem as opções de referência (compra dentro da cota e controle básico). A tentativa inicial de exceder a cota, na rodada 1, serve para revelar a regra e não é uma estratégia adicional da matriz. As adaptações das rodadas seguintes são representadas pelas alternativas A2–A4 e D2–D4.
+As estratégias são alternativas simultâneas para uma única janela de venda; portanto, não representam literalmente cada etapa temporal da seção 3. A1 e D1 descrevem as opções de referência (compra dentro da cota e controle básico). A tentativa inicial de exceder a cota, na rodada 1, serve para confirmar a aplicação da regra pública e não é uma estratégia adicional da matriz. As adaptações das rodadas seguintes são representadas pelas alternativas A2–A4 e D2–D4.
 
 | Jogador | ID | Estratégia | Descrição |
 | --- | --- | --- | --- |
@@ -115,9 +121,9 @@ As estratégias são alternativas simultâneas para uma única janela de venda; 
 
 ### 2.3 Utilidades
 
-Os payoffs são ordinais, de 0 a 10: servem para comparar preferências, não representam dinheiro nem probabilidades. Em cada par, o primeiro valor é do revendedor e o segundo é do defensor. O payoff do revendedor resume o benefício esperado da revenda menos os custos e perdas; o do defensor resume a distribuição do estoque a compradores legítimos menos o atrito e o custo dos controles.
+Os payoffs são ordinais, de 0 a 10: servem para comparar preferências, não representam dinheiro nem probabilidades. Em cada par, o primeiro valor é do revendedor e o segundo é do defensor. A ordem de preferência do revendedor considera a possibilidade de revenda, os custos e as perdas; a do defensor considera a distribuição do estoque a compradores legítimos, o atrito e o custo dos controles. Esses fatores orientam uma comparação qualitativa; diferenças entre os números não medem ganhos ou custos.
 
-### Premissas que sustentam os valores
+#### Premissas que sustentam os valores
 
 - **A1:** rende pouco ao revendedor (no máximo quatro ingressos), mas não custa nada nem gera atrito adicional.
 - **A2:** é lucrativa contra D1 e barata, mas é contida por D2, D3 e D4.
@@ -140,11 +146,13 @@ Cada célula traz **(revendedor, defensor)**. O valor do revendedor em negrito i
 
 Os payoffs do defensor refletem tanto a parcela de ingressos que permanece acessível a compradores legítimos quanto o atrito dos controles. Por isso, D1 recebe 8 contra A1, mas apenas 2–3 contra estratégias que concentram ingressos; D2 recebe 7 contra A1–A2 e menos contra estratégias que escapam à correlação ou usam intermediários; D3 recebe 5 contra A1–A3 e 2 contra A4; D4 recebe 4 em todas as linhas, representando a contenção adicional da revenda compensada pelo maior custo e atrito para compradores legítimos. Os números são ordinais e ilustrativos, não medições empíricas.
 
+Em (A1, D4), os controles acrescentam atrito mesmo quando a compra respeita a cota, justificando uma preferência inferior a (A1, D1). O valor constante 4 sob D4 é uma simplificação do modelo: não significa que todas as combinações distribuam a mesma quantidade de ingressos aos legítimos.
+
 ### 2.5 Análise
 
 **Melhores respostas.** Para cada defesa, as melhores respostas do revendedor são: A2 contra D1, A3 contra D2 e A4 contra D3 ou D4. Para cada estratégia do revendedor, as melhores respostas do defensor são: D1 contra A1, D2 contra A2, D3 contra A3 e D4 contra A4.
 
-A cadeia A2 → D2 → A3 → D3 → A4 → D4 ilustra as adaptações estratégicas das rodadas 2 a 4. A rodada 1 é anterior a essa cadeia: nela, a tentativa de exceder a cota revela a regra por conta e motiva o uso de várias contas.
+A cadeia A2 → D2 → A3 → D3 → A4 → D4 ilustra as adaptações estratégicas das rodadas 2 a 4. A rodada 1 é anterior a essa cadeia: nela, a tentativa de exceder a cota confirma a aplicação da regra por conta e motiva o uso de várias contas.
 
 **Equilíbrio de Nash em estratégias puras.** O único é (A4, D4), com payoffs (2, 4). É a única célula em que ambos estão em melhor resposta, e nenhum tem incentivo a desviar sozinho. Isso coincide com o risco residual da rodada 4: mesmo sob a defesa mais forte, o revendedor ainda prefere recrutar intermediários a desistir.
 
@@ -167,7 +175,7 @@ A decisão central é o recorte **A1/A2 × D1/D3** da matriz da seção 2.4: o r
 2. **Por que cada payoff.** Para o revendedor, A2 contra D1 é o melhor resultado (2), porque acumula ingressos sem custo extra; A1 rende 1 nas duas colunas, porque são só quatro ingressos, com ou sem verificação; A2 contra D3 é o pior (0), porque ele paga pelas contas e a verificação barra as compras extras. Para o defensor, A1 contra D1 é o melhor (2): ninguém excede a cota e ninguém sofre atrito; D3 rende 1 nas duas linhas, porque contém as contas extras mas cobra tempo e dados de todos; A2 contra D1 é o pior (0), porque o revendedor tira ingressos dos legítimos sem reação.
 3. **Melhores respostas.** Contra D1, o revendedor prefere A2 (2 > 1); contra D3, prefere A1 (1 > 0). Contra A1, o defensor prefere D1 (2 > 1); contra A2, prefere D3 (1 > 0).
 4. **Estratégia dominante.** Nenhum dos dois tem: a melhor ação de cada um muda conforme a escolha do outro.
-5. **Resultado em que ninguém melhora mudando sozinho.** Não existe em estratégias puras: em toda célula algum jogador ganha ao trocar de ação (com payoffs apenas ordinais, não calculamos equilíbrio em estratégias mistas). Partindo de (A1, D1), o revendedor passa para A2; o defensor responde com D3; o revendedor volta para A1; e, sem compras coordenadas, a verificação só cobraria atrito, então D1 volta a ser melhor. Esse giro é o que a seção 3 acompanha rodada a rodada; com as demais estratégias da matriz completa, a cadeia segue até (A4, D4), como mostra a seção 2.5.
+5. **Resultado em que ninguém melhora mudando sozinho.** Não existe em estratégias puras: em toda célula algum jogador ganha ao trocar de ação (com payoffs apenas ordinais, não calculamos equilíbrio em estratégias mistas). Partindo de (A1, D1), o revendedor passa para A2; o defensor responde com D3; o revendedor volta para A1; e, sem compras coordenadas, a verificação só cobraria atrito, então D1 volta a ser melhor. Esse giro depende da restrição às quatro combinações do recorte. Na matriz completa, A4 domina A1; por isso, o retorno a A1 não descreve as rodadas da seção 3, que seguem as alternativas adicionais até (A4, D4), conforme a seção 2.5.
 6. **Se o resultado é bom para o sistema e para os legítimos.** O melhor resultado para o sistema e para os compradores legítimos é (A1, D1): cota respeitada e compra sem atrito. Ele não se sustenta, porque o revendedor ganha ao desviar para A2. A resposta que contém esse desvio (D3) recai sobre todos: os legítimos passam a verificar a identidade mesmo sem ter feito nada errado.
 
 ### 2.7 Limitações
@@ -183,14 +191,16 @@ O comprador legítimo é modelado só pelo atrito e não escolhe estratégia.
 
 ### 3.1 Rodadas adversariais
 
-As rodadas partem do limite inicial de quatro ingressos por conta. Em cada uma, o revendedor mantém o objetivo de concentrar ingressos, mas altera o meio usado após observar a resposta da plataforma. As compras confirmadas consomem parte do estoque e não são desfeitas automaticamente quando um controle é alterado; por isso, cada rodada também reduz as opções disponíveis para a seguinte. Os controles acumulados podem aumentar o atrito para compradores legítimos.
+Uma **rodada** é uma etapa de simulação com um lote de tentativas de compra, seguido da observação dos resultados e do ajuste dos controles antes do lote seguinte. As quatro etapas consideram o mesmo evento, com estoque suficiente para observar as adaptações. As regras de cada etapa são informadas antes das novas tentativas e não alteram retroativamente compras já confirmadas.
+
+As rodadas partem do limite inicial de quatro ingressos por conta. Em cada uma, o revendedor mantém o objetivo de concentrar ingressos, mas altera o meio usado após observar a resposta da plataforma. Entre rodadas, permanecem o **estoque restante**, os **ingressos já emitidos por conta ou titular**, o **histórico das tentativas** e os **controles adotados**. As compras confirmadas consomem parte do estoque e não são desfeitas automaticamente quando um controle é alterado; por isso, cada rodada também reduz as opções disponíveis para a seguinte. Os controles acumulados podem aumentar o atrito para compradores legítimos.
 
 | Rodada | Ação do participante | Resposta do sistema ou defensor | O que se torna observável? | Adaptação para a rodada seguinte |
 | :--- | :--- | :--- | :--- | :--- |
-| **1 — Limite por conta** | O revendedor tenta comprar mais de quatro ingressos para o mesmo evento usando uma conta. | A plataforma aplica o limite de quatro ingressos por conta e recusa o excedente. | A recusa revela que a cota é aplicada à conta, inclusive quando há compras anteriores. | O revendedor cria ou controla várias contas e compra até quatro ingressos em cada uma. |
-| **2 — Correlação por IP** | O revendedor usa contas diferentes para comprar mais ingressos do mesmo evento. | Ao identificar tentativas vindas do mesmo IP, a plataforma correlaciona as contas e retém temporariamente essas compras para revisão, sem tratar o IP como prova de identidade. | O revendedor percebe que compras no mesmo IP ficam retidas. Compradores legítimos que compartilham uma rede também podem sofrer atrasos. | O revendedor distribui as tentativas por VPN ou por redes diferentes. |
-| **3 — Verificação de identidade** | O revendedor continua as compras por contas e IPs diferentes. | Ao reconhecer que o IP não basta para limitar compras coordenadas, o administrador passa a exigir uma identidade verificada para comprar ingressos desse evento. | Fica visível que mudar de IP já não elimina a exigência. Compradores legítimos passam a gastar mais tempo e fornecer dados para concluir a compra. | O revendedor recruta pessoas reais para comprar em seus próprios nomes e depois repassar os ingressos. |
-| **4 — Ingressos nominais** | O revendedor coordena compras feitas por intermediários com identidades válidas. | A plataforma vincula cada ingresso ao titular identificado, restringe a transferência e prevê a conferência do titular na entrada como controle posterior. | Os ingressos são emitidos, mas seu repasse se torna mais difícil. Compradores legítimos também podem enfrentar restrições de transferência e demora na entrada. | O revendedor testa as transferências permitidas ou tenta coordenar compras já em nome dos destinatários finais; permanece risco residual. |
+| **1 — Limite por conta** | O revendedor tenta comprar mais de quatro ingressos para o mesmo evento usando uma conta. | A plataforma aplica o limite de quatro ingressos por conta e recusa o excedente. | Para o revendedor, a recusa confirma a aplicação da cota por conta, inclusive com compras anteriores. Para o defensor, fica registrada uma tentativa acima do limite. | O revendedor cria ou controla várias contas e compra até quatro ingressos em cada uma. |
+| **2 — Correlação por IP** | O revendedor usa contas diferentes para comprar mais ingressos do mesmo evento. | Ao identificar tentativas vindas do mesmo IP, a plataforma correlaciona as contas e retém temporariamente essas compras para revisão, sem tratar o IP como prova de identidade. | O revendedor percebe as retenções. O defensor observa contas distintas com tentativas próximas no mesmo IP, um indício de coordenação. Compradores legítimos na mesma rede também podem sofrer atrasos. | O revendedor distribui as tentativas por VPN ou por redes diferentes. |
+| **3 — Verificação de identidade** | O revendedor continua as compras por contas e IPs diferentes. | Ao reconhecer que o IP não basta para limitar compras coordenadas, o administrador passa a exigir uma identidade verificada para comprar ingressos desse evento. | O revendedor percebe que mudar de IP não elimina a verificação. O defensor observa documentos repetidos entre contas e os resultados da verificação, mas não identifica toda coordenação. Legítimos gastam tempo e fornecem dados. | O revendedor recruta pessoas reais para comprar em seus próprios nomes e depois repassar os ingressos. |
+| **4 — Ingressos nominais** | O revendedor coordena compras feitas por intermediários com identidades válidas. | A plataforma vincula cada ingresso ao titular identificado, restringe a transferência e prevê a conferência do titular na entrada como controle posterior. | O revendedor observa a dificuldade de repasse. O defensor vê titulares válidos e transferências pela plataforma, sem comprovar quem coordena as compras. Legítimos também enfrentam restrições e demora na entrada. | O revendedor testa as transferências permitidas ou tenta coordenar compras já em nome dos destinatários finais; permanece risco residual. |
 
 ### 3.2 Diagrama do ciclo adaptativo
 
@@ -206,7 +216,7 @@ O fluxograma em raias acompanha as quatro rodadas da tabela. As respostas da pla
 - **O que cada lado consegue mudar?** O revendedor pode mudar a quantidade e a coordenação das contas, as redes de acesso e o uso de intermediários. A plataforma pode ajustar limites, correlação de sinais, verificações e regras de transferência.
 - **O que dispara uma adaptação?** Uma recusa ou retenção revela um limite ao revendedor; a plataforma adapta os controles quando observa padrões de tentativas que sugerem concentração ou quando uma defesa anterior se mostra insuficiente.
 - **Quais são os custos?** Para o revendedor, são custos de manter contas, coordenar tentativas e recrutar intermediários, além do risco de perder compras. Para a plataforma, são custos operacionais e de tratamento de dados; para compradores legítimos, há tempo, verificações, recusas indevidas e restrições de transferência.
-- **Onde pode surgir uma corrida armamentista?** Quando cada nova defesa leva o revendedor a adotar outro meio de coordenação e essa mudança leva a plataforma a impor controles mais abrangentes. O ciclo pode elevar custos e falsos positivos sem eliminar completamente a concentração de ingressos.
+- **Onde pode surgir uma corrida armamentista?** Quando cada nova defesa leva o revendedor a adotar outro meio de coordenação e essa mudança leva a plataforma a impor controles mais abrangentes. O ciclo pode elevar custos e falsos positivos sem eliminar completamente a concentração de ingressos. Há assimetria: o revendedor paga pelas contas e intermediários que utiliza, enquanto controles obrigatórios como D3 e D4 geram custos para a plataforma e para todos os compradores do evento.
 
 <a id="ameacas-e-riscos"></a>
 
@@ -221,9 +231,9 @@ Cada ponto é uma interface, regra ou componente que o revendedor usa para conce
 | **E1** | Cadastro de contas | Criar uma conta nova quase não custa (P1). | 1 e 2 |
 | **E2** | Limite de quatro ingressos por conta, na compra | A cota é contada por conta, não por pessoa (P1). | 1 e 2 |
 | **E3** | Correlação por IP, no registro de tentativas | O IP muda com VPN e é compartilhado por compradores legítimos (P2). | 2 e 3 |
-| **E4** | Respostas da compra (aceite, retenção, recusa, verificação) | Cada resposta dá pistas dos critérios internos, que o revendedor não conhece diretamente (seção 1.2). | Todas |
+| **E4** | Respostas da compra (aceite, retenção, recusa, verificação) | Respostas detalhadas dão pistas dos critérios internos (P4). | Todas |
 | **E5** | Verificação de identidade (serviço externo) | Uma identidade válida não prova que o comprador age por conta própria (P3). | 3 e 4 |
-| **E6** | Emissão de ingresso nominal e transferência | Transferências permitidas e a conferência na entrada podem ser usadas para repassar ingressos. | 4 |
+| **E6** | Emissão de ingresso nominal e transferência | Transferências permitidas e compras em nome do destinatário final não impedem a revenda (P5). | 4 |
 
 ### 4.2 Diagrama de superfície de ataque
 
@@ -238,22 +248,22 @@ O diagrama segue o fluxo de compra, do cadastro à emissão do ingresso. Compone
 O prefixo **AM** evita confusão com as estratégias A1 a A4 do revendedor na seção 2.
 
 - **AM1:** Um **revendedor** pode **comprar quatro ingressos em cada uma de várias contas** por meio do **cadastro e da regra de limite por conta (E1, E2)**, aproveitando **o pressuposto de uma conta por interessado (P1)**, causando **concentração de ingressos acima da cota** sobre **a distribuição justa do estoque**.
-- **AM2:** Um **revendedor** pode **distribuir as compras por VPN ou redes diferentes** por meio da **correlação por IP (E3)**, aproveitando **o pressuposto de que o IP revela compras coordenadas (P2)**, causando **compras coordenadas não detectadas e retenção de legítimos em redes compartilhadas** sobre **a distribuição justa e o acesso dos compradores legítimos**.
+- **AM2:** Um **revendedor** pode **distribuir as compras por VPN ou redes diferentes** por meio da **correlação por IP (E3)**, aproveitando **o pressuposto de que o IP revela compras coordenadas (P2)**, causando **compras coordenadas não detectadas e concentração de ingressos** sobre **a distribuição justa do estoque**. A retenção de legítimos em redes compartilhadas é um possível efeito colateral da defesa baseada em IP.
 - **AM3:** Um **revendedor** pode **recrutar intermediários reais que compram em seus nomes e repassam os ingressos** por meio da **verificação de identidade (E5)**, aproveitando **o pressuposto de que identidade verificada impede a concentração (P3)**, causando **concentração com identidades válidas** sobre **a distribuição justa do estoque**.
-- **AM4:** Um **revendedor** pode **fazer compras de teste e comparar as respostas** por meio das **respostas da compra (E4)**, aproveitando **as pistas que respostas detalhadas dão sobre os critérios de detecção**, causando **adaptação mais rápida e barata às defesas** sobre **a eficácia dos controles**.
-- **AM5:** Um **revendedor** pode **repassar ingressos nominais por transferências permitidas ou comprar em nome do destinatário final** por meio da **titularidade e transferência do ingresso (E6)**, aproveitando **o pressuposto de que o titular é quem vai ao evento**, causando **a revenda de ingressos que passaram pelos controles** sobre **a distribuição justa e a confiança no ingresso nominal**.
+- **AM4:** Um **revendedor** pode **fazer compras de teste e comparar as respostas** por meio das **respostas da compra (E4)**, aproveitando **a falha do pressuposto de que as respostas não expõem critérios internos (P4)**, causando **adaptação mais rápida e barata às defesas** sobre **a eficácia dos controles**.
+- **AM5:** Um **revendedor** pode **repassar ingressos nominais por transferências permitidas ou comprar em nome do destinatário final** por meio da **titularidade e transferência do ingresso (E6)**, aproveitando **a falha do pressuposto de que o controle nominal impede a revenda (P5)**, causando **a revenda de ingressos que passaram pelos controles** sobre **a distribuição justa e a confiança no ingresso nominal**.
 
 ### 4.4 Avaliação de riscos
 
-Probabilidade e impacto em escala de 1 a 3; risco = probabilidade × impacto.
+Probabilidade e impacto em escala de 1 a 3; risco = probabilidade × impacto. As notas são estimativas qualitativas para o cenário hipotético, sem medições empíricas.
 
 | ID | Cenário de ameaça | Ponto de exploração | Pressuposto ou fraqueza | Ativo afetado | Probabilidade | Impacto | Risco |
 | --- | --- | --- | --- | --- | ---: | ---: | ---: |
 | **AM1** | Várias contas com quatro ingressos cada | E1, E2 | P1: uma conta por interessado | Distribuição justa do estoque | 3 | 3 | **9** |
-| **AM2** | Contas distribuídas por VPN ou redes diferentes | E3 | P2: IP indica compras coordenadas | Distribuição justa; acesso dos legítimos | 2 | 3 | **6** |
+| **AM2** | Contas distribuídas por VPN ou redes diferentes | E3 | P2: IP indica compras coordenadas | Distribuição justa do estoque | 2 | 3 | **6** |
 | **AM3** | Intermediários reais com identidade válida | E5 | P3: identidade impede concentração | Distribuição justa do estoque | 2 | 3 | **6** |
-| **AM4** | Sondagem dos critérios pelas respostas | E4 | Respostas detalhadas dão pistas dos critérios | Eficácia dos controles | 3 | 2 | **6** |
-| **AM5** | Repasse de ingressos nominais | E6 | Titular registrado é quem vai ao evento | Distribuição justa; confiança no ingresso | 2 | 2 | **4** |
+| **AM4** | Sondagem dos critérios pelas respostas | E4 | P4: respostas não expõem critérios internos | Eficácia dos controles | 3 | 2 | **6** |
+| **AM5** | Repasse de ingressos nominais | E6 | P5: controle nominal impede revenda | Distribuição justa; confiança no ingresso | 2 | 2 | **4** |
 
 - **AM1:** é a melhor resposta contra a regra inicial (A2 contra D1, seção 2.4) e custa pouco; cada conta extra tira quatro ingressos dos legítimos.
 - **AM2:** só surge depois da correlação por IP e exige gerenciar redes para muitas contas; a concentração é a mesma de AM1.
@@ -263,19 +273,21 @@ Probabilidade e impacto em escala de 1 a 3; risco = probabilidade × impacto.
 
 ### 4.5 Resposta à ameaça prioritária (AM1)
 
-**AM1** tem o maior risco (9) e origina as demais: AM2 a AM4 são formas de manter a concentração por várias contas depois que a plataforma reage.
+**AM1** tem o maior risco (9). AM2 e AM3 são adaptações para manter a concentração depois que a plataforma reage; AM4 facilita o aprendizado dos controles.
 
-1. **Resposta do sistema.** A cota de quatro ingressos passa a ser contada **por titular verificado**, somando as contas do mesmo documento. A verificação é pedida só no checkout deste evento, com o carrinho reservado enquanto ocorre. O IP deixa de recusar compras e só prioriza revisões, e as respostas ficam **uniformes** ("compra em análise" ou "limite do titular atingido"). Como mudança de incentivo, a plataforma oferece **transferência oficial pelo valor de face**, o que reduz a margem da revenda. O painel acompanha os ingressos por titular, a taxa de compras retidas e a taxa de contestações aceitas, que mede quantos legítimos foram barrados por engano. A resposta combina D3 com parte de D4 do modelo estático.
+1. **Resposta do sistema.** A cota de quatro ingressos passa a ser contada **por titular verificado**, somando as contas do mesmo documento. A verificação é pedida só no checkout deste evento, com reserva temporária do carrinho e expiração após prazo predefinido, para limitar a retenção de estoque sem concluir a compra. O IP é usado apenas para priorizar revisões, sem determinar recusas por si só, e as respostas ficam **uniformes** ("compra em análise" ou "limite do titular atingido"). Como mudança de incentivo, a plataforma oferece **transferência oficial pelo valor de face**, buscando reduzir a margem da revenda por esse canal. O painel acompanha os ingressos por titular, a taxa de compras retidas e a proporção de contestações aceitas, que indica falsos positivos entre os casos contestados. A resposta combina D3 com parte de D4 do modelo estático. Na matriz completa, contra A4, o defensor recebe 2 sob D3 e 4 sob D4: a verificação de identidade isolada não basta para conter intermediários. A transferência oficial busca tornar o repasse menos vantajoso, mas não garante eliminar a revenda fora da plataforma.
 2. **Informação revelada.** O revendedor aprende que a cota passou a ser por pessoa, que o documento é o identificador decisivo e em que momento a verificação ocorre. Com respostas uniformes, não sabe mais qual sinal causou uma retenção, mas ainda vê sua taxa de aprovação.
 3. **Adaptação do adversário.** Pela cadeia de melhores respostas da seção 2.5, o revendedor passa para **AM3**: intermediários reais ou documentos de familiares, cada um com até quatro ingressos. Também pode testar se contas antigas escapam da verificação.
 4. **Efeitos colaterais.** Compradores legítimos fornecem dados pessoais e gastam mais tempo no checkout; quem não tem documento aceito ou enfrenta falha no serviço externo pode perder a compra; grupos com mais de quatro pessoas precisam de outro titular. A plataforma passa a guardar dados sensíveis, com coleta mínima e prazo de retenção definido.
-5. **Risco residual.** AM3 não é bloqueada, porque cada intermediário é um titular válido. O risco se desloca, como prevê o equilíbrio (A4, D4) da seção 2.5:
+5. **Risco residual.** AM3 não é bloqueada, porque cada intermediário é um titular válido. O risco se desloca para os intermediários, em coerência com a melhor resposta A4 sob D3 e D4 na seção 2.5. As notas abaixo estimam o efeito das medidas propostas; não são derivadas numericamente dos payoffs. A queda de AM1 não significa eliminação do risco de concentração:
 
    | ID | Antes (P × I) | Depois (P × I) | Motivo |
    | --- | ---: | ---: | --- |
    | **AM1** | 3 × 3 = 9 | 1 × 3 = **3** | Contas do mesmo titular somam na mesma cota. |
+   | **AM2** | 2 × 3 = 6 | 1 × 3 = **3** | Mudar de IP não supera a cota por titular; o uso de pessoas distintas é tratado em AM3. |
    | **AM3** | 2 × 3 = 6 | 3 × 3 = **9** | Intermediários viram o caminho mais barato. |
    | **AM4** | 3 × 2 = 6 | 3 × 1 = **3** | Respostas uniformes dão menos pistas. |
+   | **AM5** | 2 × 2 = 4 | 2 × 2 = **4** | Transferências oficiais são limitadas, mas compras em nome do destinatário e acordos externos ainda permitem repasse. |
 
    A próxima reação do defensor seria buscar padrões entre titulares distintos, como o mesmo meio de pagamento ou transferências para o mesmo destino. Esses sinais também seriam indícios, não provas, e reabririam o ciclo da seção 3.
 6. **O que preservar.** A distribuição justa do estoque, sem buscá-la a qualquer custo: regra pública e previsível (quatro por titular), atrito proporcional ao risco do evento, canal de contestação para compras retidas por engano, coleta mínima de dados e disponibilidade da venda no pico de demanda.
@@ -285,7 +297,7 @@ Probabilidade e impacto em escala de 1 a 3; risco = probabilidade × impacto.
 ## 🏁 5. Conclusão
 
 - **O que torna o sistema adversarial?** O revendedor quer concentrar ingressos acima da cota, e a plataforma quer distribuí-los entre compradores legítimos. O limite por conta é a regra que um lado explora e o outro defende (seções 1.3 e 1.5).
-- **Como os participantes decidem?** Cada lado escolhe a melhor resposta à ação do outro. Na decisão central não há resultado estável (seção 2.6); com todas as estratégias, a cadeia de melhores respostas termina em (A4, D4) (seção 2.5).
+- **Como os participantes decidem?** Cada lado escolhe a melhor resposta à ação do outro. No recorte 2 × 2 não há equilíbrio em estratégias puras (seção 2.6); com todas as estratégias, a cadeia de melhores respostas termina em (A4, D4) (seção 2.5).
 - **Como a interação evolui?** Cada recusa, retenção ou verificação revela um critério ao revendedor, que muda o meio sem mudar o objetivo: conta única, várias contas, redes distintas, intermediários (seção 3). Cada defesa nova acrescenta atrito para os legítimos.
 - **Depois que o sistema responder, o que o outro lado aprenderá e tentará fazer em seguida?** Com a cota por titular verificado (seção 4.5), o revendedor aprende que o documento é o identificador decisivo e passa a recrutar intermediários reais (AM3). A plataforma, então, procuraria padrões entre titulares distintos, e o ciclo recomeça.
 
@@ -299,6 +311,6 @@ As fontes usadas (aulas da disciplina, teoria dos jogos e documentação das fer
 
 ## 🤖 7. Uso de IA generativa
 
-- **Ferramenta:** Claude Code (Anthropic).
-- **Tarefas:** conferir o relatório contra o enunciado, redigir e revisar trechos do texto, montar as referências e corrigir links.
+- **Ferramentas:** Claude Code e Claude (Anthropic); ChatGPT/Codex (OpenAI).
+- **Tarefas:** apoio à redação e revisão das seções 1 a 5, organização das referências e correção de links; avaliação externa do relatório com Claude; revisão pontual com ChatGPT/Codex dos pressupostos (1.3), da interpretação do modelo estático (2), das rodadas (3) e da coerência das ameaças e do risco residual (4).
 - **Verificação:** cada item foi conferido com o checklist do enunciado; os payoffs da seção 2.6 foram conferidos contra a matriz da seção 2.4; os links das referências foram abertos um a um; e o texto gerado foi lido e ajustado antes de entrar no relatório.
